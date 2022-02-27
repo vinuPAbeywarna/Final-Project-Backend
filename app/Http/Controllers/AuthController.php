@@ -7,19 +7,22 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function register(Request $request):JsonResponse
+    public function Register(Request $request):JsonResponse
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
-            'role'=> 'required|string|in:buyer,seller'
-        ]);
 
         try {
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email',
+                'password' => 'required|confirmed',
+                'role' => 'required|string|in:buyer,seller'
+            ]);
+
+
             User::create([
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
@@ -50,8 +53,10 @@ class AuthController extends Controller
                     'message' => 'Invalid password'
                 ]);
             }
+        } else {
+            return response()->json(['error' => 'user not found'], 401);
         }
-        return response()->json(['error' => 'login_error'], 401);
+
     }
 
     public function Check(): JsonResponse

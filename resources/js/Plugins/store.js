@@ -61,6 +61,7 @@ const Store = new Vuex.Store({
                 router.push('/auth').then(r => {
                     //window.location.reload();
                 });
+
             });
         },
     }

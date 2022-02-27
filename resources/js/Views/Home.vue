@@ -1,8 +1,8 @@
 <template>
     <v-container>
-        <p>
-            {{ $store.state.User }}
-        </p>
+<!--        <p>-->
+<!--            {{ $store.state.User }}-->
+<!--        </p>-->
     </v-container>
 </template>
 

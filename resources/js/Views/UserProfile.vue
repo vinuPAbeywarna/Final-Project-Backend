@@ -1,17 +1,13 @@
 <template>
     <v-container>
-        <p>
-            {{ $store.state.User }}
-        </p>
+        <h4 class="text-h4">{{ $store.state.User.name }} ({{ $store.state.User.role }})</h4>
     </v-container>
+
 </template>
 
 <script>
-
 export default {
-    name: "Home",
-    methods:{
-    }
+    name: "UserProfile"
 }
 </script>
 

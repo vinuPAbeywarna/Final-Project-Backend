@@ -10,7 +10,7 @@ Route::get('/auth', function () {
     return view('App');
 })->name('Auth');
 
-Route::get('/admin-profile', function () {
+Route::get('/user-profile', function () {
     return view('App');
 })->name('AdminProfile');
 

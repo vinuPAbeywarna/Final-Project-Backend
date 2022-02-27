@@ -33,23 +33,16 @@
           <v-divider></v-divider>
 
           <v-list>
-              <v-list-item to="/admin-profile">
+              <v-list-item to="/user-profile">
                   <v-list-item-icon>
                       <v-icon>mdi-account-circle</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                      <v-list-item-title>Admin Profile</v-list-item-title>
+                      <v-list-item-title>Profile</v-list-item-title>
                   </v-list-item-content>
               </v-list-item>
-              <v-list-item to="/seller-account-approval">
-                  <v-list-item-icon>
-                      <v-icon>mdi-account-check-outline</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                      <v-list-item-title>Seller account <br>
-                          Approval</v-list-item-title>
-                  </v-list-item-content>
-              </v-list-item>
+
+
               <v-list-item to="/user-details">
                   <v-list-item-icon>
                       <v-icon>mdi-card-account-details</v-icon>
@@ -58,6 +51,17 @@
                       <v-list-item-title>User Details</v-list-item-title>
                   </v-list-item-content>
               </v-list-item>
+
+              <v-list-item v-if="$store.state.User.role === 'admin'" to="/seller-account-approval">
+                  <v-list-item-icon>
+                      <v-icon>mdi-account-check-outline</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                      <v-list-item-title>Seller account <br>
+                          Approval</v-list-item-title>
+                  </v-list-item-content>
+              </v-list-item>
+
 
               <v-list-item >
                   <v-list-item-icon>
@@ -83,14 +87,7 @@
                       <v-list-item-title>Sales Analysing <br>Reports</v-list-item-title>
                   </v-list-item-content>
               </v-list-item>
-              <v-list-item v-if="$store.state.User.role === 'seller'">
-                  <v-list-item-icon>
-                      <v-icon>mdi-account-circle</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                      <v-list-item-title>Seller Profile</v-list-item-title>
-                  </v-list-item-content>
-              </v-list-item>
+
 
               <v-divider></v-divider>
 

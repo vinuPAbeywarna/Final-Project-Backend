@@ -2,9 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/js/Authentication.js": "/js/Authentication.js",
     "/js/Home.js": "/js/Home.js",
-    "/css/app.css": "/css/app.css",
-    "/js/Admin Profile.js": "/js/Admin Profile.js",
     "/js/AdminProfile.js": "/js/AdminProfile.js",
     "/js/SellerAccountApproval.js": "/js/SellerAccountApproval.js",
-    "/js/UserDetails.js": "/js/UserDetails.js"
+    "/js/UserDetails.js": "/js/UserDetails.js",
+    "/css/app.css": "/css/app.css"
 }

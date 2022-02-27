@@ -38,23 +38,25 @@ class AuthController extends Controller
 
     public function Login(Request $request): JsonResponse
     {
-        if (User::where('email', $request->get('email'))->exists()) {
-            if (Auth::attempt(['email' => $request->get('email'),'password' => $request->get('password')])){
-                Auth::user()->tokens()->delete();
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'User logged in successfully',
-                    'token'=> Auth::user()->createToken(Auth::id())->plainTextToken,
-                    'user' => Auth::user(),
-                ]);
-            }else{
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Invalid password'
-                ]);
-            }
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $token = auth()->attempt([
+            'email' => $request->get('email'),
+            'password' => $request->get('password')
+        ]);
+
+        if (!$token) {
+            return response()->json(['message' => 'Invalid credentials'], 401);
         } else {
-            return response()->json(['error' => 'user not found'], 401);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User logged in successfully',
+                'user' => auth()->user(),
+                'token'=> $token,
+            ]);
         }
 
     }

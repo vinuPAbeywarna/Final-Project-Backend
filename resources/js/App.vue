@@ -4,7 +4,7 @@
           <v-app-bar-nav-icon @click="drawer = !drawer" />
           <v-row justify="start" no-gutters>
               <h3 class="text-h5 font-weight-bold">
-                  VinS Artisan Market
+                  Vins Artisan Market
               </h3>
           </v-row>
           <v-btn v-if="$route.path !== '/auth'" @click="$store.commit('deAuth')" text>Sign Out</v-btn>
@@ -15,14 +15,14 @@
           v-if="$route.path !== '/auth' && $store.state.User !== null"
           v-model="drawer"
           app
-          color="#1565C0"
+          color="light-blue darken-4"
           dark>
           <!--Menu Items -->
           <v-list-item two-line>
 
               <v-list-item-content>
                   <v-list-item-title class="text-h6">
-                      VinS Artisan Market
+                      Vins Artisan Market
                   </v-list-item-title>
                   <v-list-item-subtitle>
                       Logged In
@@ -42,8 +42,28 @@
                   </v-list-item-content>
               </v-list-item>
 
+              <v-list-item to="/wish-list"  v-if="$store.state.User.role === 'buyer'">
+                  <v-list-item-icon>
+                      <v-icon>mdi-heart</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                      <v-list-item-title>Wish List</v-list-item-title>
+                  </v-list-item-content>
+              </v-list-item>
 
-              <v-list-item to="/user-details">
+              <v-list-item to="/cart"  v-if="$store.state.User.role === 'buyer'">
+                  <v-list-item-icon>
+                      <v-icon>mdi-cart-minus</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                      <v-list-item-title>Cart</v-list-item-title>
+                  </v-list-item-content>
+              </v-list-item>
+
+
+
+
+              <v-list-item to="/user-details" v-if="$store.state.User.role === 'admin' && 'seller'">
                   <v-list-item-icon>
                       <v-icon>mdi-card-account-details</v-icon>
                   </v-list-item-icon>
@@ -63,7 +83,7 @@
               </v-list-item>
 
 
-              <v-list-item >
+              <v-list-item v-if="$store.state.User.role === 'admin' && 'seller'">
                   <v-list-item-icon>
                       <v-icon>mdi-cart-arrow-right</v-icon>
                   </v-list-item-icon>

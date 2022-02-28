@@ -3,6 +3,9 @@ import Vue from 'vue';
 import Vuetify from "./Plugins/vuetify";
 import Router from "./Plugins/router";
 import Store from './Plugins/store';
+import VueThreeSixty from 'vue-360';
+Vue.use(VueThreeSixty);
+import'vue-360/dist/css/style.css';
 
 import App from "./App.vue";
 

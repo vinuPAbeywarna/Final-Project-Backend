@@ -22,4 +22,16 @@ Route::get('/user-details', function () {
     return view('App');
 })->name('UserDetails');
 
+Route::get('/cart', function () {
+    return view('App');
+})->name('Cart');
+
+Route::get('/wish-list', function () {
+    return view('App');
+})->name('WishList');
+
+Route::get('/products', function () {
+    return view('App');
+})->name('Products');
+
 

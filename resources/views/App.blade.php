@@ -8,6 +8,7 @@
 
     <!-- Primary Meta Tags -->
     <title>Vin's Artisan Market</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" type="text/css">
     <meta name="title" content="Vin's Artisan Market">
     <meta name="description" content="AIO Market for Artisan Products">
 

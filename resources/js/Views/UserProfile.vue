@@ -1,21 +1,23 @@
 <template>
     <v-container>
-        <h4 class="text-h4">Welcome {{ $store.state.User.name }} | {{ $store.state.User.role }}</h4>
+        <h4 class="text-h6 " >Welcome {{ $store.state.User.name }} | {{ $store.state.User.role }}</h4>
 
             <v-container>
                 <v-row>
                     <v-col>
-                        <v-text class=" font-weight-bold">  Profile details</v-text>
+                        <span class=" font-weight-bold ">  Profile details</span>
 
                         <v-card  tile height="95"  dense class="mt-3" >
                             <v-row>
 
                                 <v-avatar size="85" class="mr-3 ml-6 mt-1 " dense >
-                                    <img  src="/img/avatar2.png"/>;
+                                    <v-img  v-if="$store.state.User.role === 'admin'" src="/images/businessman-character-avatar-isolated_24877-60111.webp"/>
+                                    <v-img  v-if="$store.state.User.role === 'seller'" src="/images/img_avatar2.png"/>
+                                    <v-img  v-if="$store.state.User.role === 'buyer'" src="/images/avatar6.png"/>
 
                                 </v-avatar>
-                                <v-col align="left" class="mr-6">
-                                    <h4 class="mt-3 ml-16 font-weight-bold"> Welcome Nimal Kumara</h4>
+                                <v-col class="mr-6">
+
                                 </v-col>
                             </v-row>
                         </v-card >
@@ -23,32 +25,30 @@
 
                         </v-card>
                         <v-container fluid>
-                            <v-text><h4>Personal Details</h4></v-text>
-                            <v-divider></v-divider>
-                            <v-spacer></v-spacer>
                             <v-row>
                                 <v-card class="mt-5" width="1500" dense >
                                     <v-form>
                                         <v-container >
-                                            <v-row>
-
+                                            <v-row class="mt-1">
                                                 <v-text-field
-                                                    v-model="personal_firstname"
 
+                                                    :counter="30"
+                                                    v-model="username"
 
-                                                    :counter="15"
                                                     label="Name"
                                                     required
                                                     outlined
                                                     dense
                                                     class="ml-1 mr-1 "
+
                                                 ></v-text-field>
 
 
 
                                                 <v-text-field
-                                                    v-model="personal_nic"
+
                                                     label="NIC Number"
+                                                    v-model="nic"
                                                     outlined
                                                     dense
                                                     class="ml-1 mr-1 "
@@ -57,24 +57,27 @@
 
 
                                                 <v-text-field
-                                                    v-model="personal_email"
+
                                                     label="E-mail"
+                                                    v-model="email"
                                                     outlined
                                                     dense
                                                     class="ml-1 mr-1"
                                                 ></v-text-field>
 
                                                 <v-text-field
-                                                    v-model="personal_tele"
+
                                                     label="Contact Number"
+                                                    v-model="contact"
                                                     outlined
                                                     dense
                                                     class="ml-1 mr-1"
                                                 ></v-text-field>
 
                                                 <v-text-field
-                                                    v-model="personal_city"
+
                                                     label="City"
+                                                    v-model="city"
                                                     outlined
                                                     dense
                                                     class="ml-1 mr-1"
@@ -86,7 +89,7 @@
                                         </v-container>
 
                                     </v-form>
-                                    <v-expansion-panels inset class="mt-1" dense v-model="details">
+                                    <v-expansion-panels inset class="mt-1" dense >
                                         <v-expansion-panel
                                             v-for="(item,i) in 1"
                                             :key="i"
@@ -94,8 +97,8 @@
                                             <v-expansion-panel-header class="font-weight-bold">Other Details</v-expansion-panel-header>
                                             <v-expansion-panel-content>
                                                 <v-text-field
-                                                    v-model="details_province"
-                                                    label="Province"
+                                                    label="Address"
+                                                    v-model="address"
                                                     outlined
                                                     dense
                                                     readonly
@@ -103,8 +106,9 @@
                                                 ></v-text-field>
 
                                                 <v-text-field
-                                                    v-model="details_district"
-                                                    label="District"
+
+                                                    label="Postal Code"
+                                                    v-model="postalcode"
                                                     outlined
                                                     dense
                                                     readonly
@@ -112,8 +116,9 @@
                                                 ></v-text-field>
 
                                                 <v-text-field
-                                                    v-model="details_division"
-                                                    label="Division"
+
+                                                    label="Birth Day"
+                                                    v-model="birthday"
                                                     outlined
                                                     dense
                                                     readonly
@@ -121,8 +126,8 @@
                                                 ></v-text-field>
 
                                                 <v-text-field
-                                                    v-model="details_gnd"
-                                                    label="GND"
+                                                    label="Gender"
+                                                    v-model="gender"
                                                     outlined
                                                     dense
                                                     readonly
@@ -135,7 +140,7 @@
                                         <v-btn
                                             color="blue darken-1"
                                             text
-                                            @click="save"
+
                                         >
                                             Save
                                         </v-btn>
@@ -163,7 +168,28 @@
 
 <script>
 export default {
-    name: "UserProfile"
+    data: () => ({
+        username:'Vinuri',
+        nic:'0123654789v',
+        email:'abc@gmail.com',
+        contact:'0714562369',
+        city:'Colombo',
+        address:'No.12,Colombo Road,Colombo',
+        postalcode:'1100',
+        birthday:'12-04-1998',
+        gender:'Female',
+
+    }),
+
+
+
+    methods: {
+
+
+        name: "UserProfile"
+    }
+
+
 }
 </script>
 

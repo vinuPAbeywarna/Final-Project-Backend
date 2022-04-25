@@ -91,7 +91,7 @@
 
 
 
-              <v-list-item to="/user-details" v-if="$store.state.User.role === 'admin' && 'seller'">
+              <v-list-item to="/user-details" v-if="$store.state.User.role === 'admin' " >
                   <v-list-item-icon>
                       <v-icon>mdi-card-account-details</v-icon>
                   </v-list-item-icon>

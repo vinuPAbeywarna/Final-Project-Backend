@@ -71,9 +71,9 @@
                                             v-bind="attrs"
                                             v-on="on"
                                             to="/add-new-products"
-                                            v-if="$store.state.User.role === 'admin'"
+                                            v-if="$store.state.User.role === 'admin' && 'seller'"
                                         >
-                                            New User
+                                            Add New Product
                                         </v-btn>
                                     </template>
                                     <v-card>

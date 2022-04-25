@@ -5,7 +5,7 @@
             <v-card
 
                 to="/products"
-                v-for="i in 5"
+                v-for="i in 1"
                 :key="i"
                 hover
                 ripple

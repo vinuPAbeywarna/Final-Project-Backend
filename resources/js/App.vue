@@ -33,6 +33,16 @@
           <v-divider></v-divider>
 
           <v-list>
+
+              <v-list-item to="/dashboard">
+                  <v-list-item-icon>
+                      <v-icon>mdi-view-dashboard</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                      <v-list-item-title>Dashboard</v-list-item-title>
+                  </v-list-item-content>
+              </v-list-item>
+
               <v-list-item to="/user-profile">
                   <v-list-item-icon>
                       <v-icon>mdi-account-circle</v-icon>
@@ -42,7 +52,16 @@
                   </v-list-item-content>
               </v-list-item>
 
-              <v-list-item to="/wish-list"  v-if="$store.state.User.role === 'buyer'">
+              <v-list-item to="product-list">
+                  <v-list-item-icon>
+                      <v-icon>mdi-cart-variant</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                      <v-list-item-title>Product List</v-list-item-title>
+                  </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item to="/wish-list" >
                   <v-list-item-icon>
                       <v-icon>mdi-heart</v-icon>
                   </v-list-item-icon>
@@ -51,12 +70,21 @@
                   </v-list-item-content>
               </v-list-item>
 
-              <v-list-item to="/cart"  v-if="$store.state.User.role === 'buyer'">
+              <v-list-item to="/cart"  >
                   <v-list-item-icon>
                       <v-icon>mdi-cart-minus</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
                       <v-list-item-title>Cart</v-list-item-title>
+                  </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item to="/shops" >
+                  <v-list-item-icon>
+                      <v-icon>mdi-shopping-outline</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                      <v-list-item-title>Shops</v-list-item-title>
                   </v-list-item-content>
               </v-list-item>
 
@@ -83,28 +111,37 @@
               </v-list-item>
 
 
-              <v-list-item v-if="$store.state.User.role === 'admin' && 'seller'">
+              <v-list-item v-if="$store.state.User.role === 'admin' && 'seller'" to="/orders">
                   <v-list-item-icon>
                       <v-icon>mdi-cart-arrow-right</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                      <v-list-item-title>Shipping and Orders</v-list-item-title>
+                      <v-list-item-title>Orders</v-list-item-title>
                   </v-list-item-content>
               </v-list-item>
-              <v-list-item >
+              <v-list-item to="/tracking-details" >
                   <v-list-item-icon>
                       <v-icon>mdi-cash</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                      <v-list-item-title>Payments Details</v-list-item-title>
+                      <v-list-item-title>Tracking Details</v-list-item-title>
                   </v-list-item-content>
               </v-list-item>
-              <v-list-item >
+<!--              <v-list-item >-->
+<!--                  <v-list-item-icon>-->
+<!--                      <v-icon>mdi-poll</v-icon>-->
+<!--                  </v-list-item-icon>-->
+<!--                  <v-list-item-content>-->
+<!--                      <v-list-item-title>Sales Analysing <br>Reports</v-list-item-title>-->
+<!--                  </v-list-item-content>-->
+<!--              </v-list-item>-->
+
+              <v-list-item to="/settings">
                   <v-list-item-icon>
-                      <v-icon>mdi-poll</v-icon>
+                      <v-icon>mdi-cog</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                      <v-list-item-title>Sales Analysing <br>Reports</v-list-item-title>
+                      <v-list-item-title>Settings</v-list-item-title>
                   </v-list-item-content>
               </v-list-item>
 

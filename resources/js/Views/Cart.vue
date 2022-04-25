@@ -15,7 +15,7 @@
 
                     Total: 5500 LKR
                     <v-spacer/>
-                    <v-btn class="ml-2" color="primary">Continue</v-btn>
+                    <v-btn class="ml-2" color="primary" to="/checkout-page">Proceed to Checkout</v-btn>
                 </v-row>
             </v-card-title>
         </v-card>

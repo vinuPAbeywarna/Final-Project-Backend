@@ -89,13 +89,9 @@
                                         </v-container>
 
                                     </v-form>
-                                    <v-expansion-panels inset class="mt-1" dense >
-                                        <v-expansion-panel
-                                            v-for="(item,i) in 1"
-                                            :key="i"
-                                        >
-                                            <v-expansion-panel-header class="font-weight-bold">Other Details</v-expansion-panel-header>
-                                            <v-expansion-panel-content>
+
+                                        <v-row>
+                                            <v-col cols="12">
                                                 <v-text-field
                                                     label="Address"
                                                     v-model="address"
@@ -133,9 +129,9 @@
                                                     readonly
                                                     class="ml-1 mr-1"
                                                 ></v-text-field>
-                                            </v-expansion-panel-content>
-                                        </v-expansion-panel>
-                                    </v-expansion-panels>
+                                            </v-col>
+                                        </v-row>
+
                                     <v-card-actions class="justify-center">
                                         <v-btn
                                             color="blue darken-1"

@@ -18,7 +18,7 @@ const Store = new Vuex.Store({
             window.localStorage.setItem('token', data.token);
             window.localStorage.setItem('user', JSON.stringify(data.user));
             authClient.defaults.headers.authorization = 'Bearer '+ data.token;
-            router.push('/').then(r => {
+            router.push('/user-profile').then(r => {
                 window.location.reload();
             });
         },

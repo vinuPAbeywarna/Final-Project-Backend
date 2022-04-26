@@ -9,8 +9,6 @@
             xl="12"
         >
 
-
-
                         <v-toolbar-title class="font-weight-regular mt-5 ml-4">User Details</v-toolbar-title>
 
 
@@ -120,7 +118,7 @@
                                                                     md="4"
                                                                 >
                                                                     <v-text-field
-                                                                        v-model="editedItem.contact"
+                                                                        v-model="editedItem.contact_no"
                                                                         label="Contact Details"
                                                                     ></v-text-field>
                                                                 </v-col>
@@ -222,7 +220,7 @@ export default {
             },
             { text: 'User Role', value: 'role' },
             { text: 'Email', value: 'email' },
-            { text: 'Contact Number', value: 'contact' },
+            { text: 'Contact Number', value: 'contact_no' },
             { text: 'City', value: 'city' },
             { text: 'Actions', value: 'actions', sortable: false,  },
         ],
@@ -238,14 +236,14 @@ export default {
             name: '',
             role: '',
             email: '',
-            contact: '',
+            contact_no: '',
             city: '',
         },
         defaultItem: {
             name: '',
             role: '',
             email: '',
-            contact: '',
+            contact_no: '',
             city: '',
         },
     }),
@@ -266,36 +264,52 @@ export default {
     },
 
     created () {
-        this.initialize()
+        // this.initialize();
+        this.GetUsers();
     },
 
     methods: {
+        GetUsers() {
+            axios
+                .get('/user-details/GetUsers')
+                .then((response) => {
+                    this.users = response.data.users
+                    console.log(response.data.users)
+                })
+                .catch(error => console.log(error))
+
+        },
         initialize () {
-            this.users = [
-                {
-                    name: 'Vinuri Prabodhya',
-                    role: 'Admin',
-                    email: 'vinuri@gmail.com',
-                    contact: '0714523963',
-                    city: 'Colombo',
-                },
-                {
-                    name: 'Ravindi Samarawickrama',
-                    role: 'Customer',
-                    email: 'ravi@gmail.com',
-                    contact: '0775625369',
-                    city: 'Colombo',
-                },
-                {
-                    name: 'John De Silva',
-                    role: 'Seller',
-                    email: 'john@gmail.com',
-                    contact: '0774585963',
-                    city: 'Colombo',
-                },
+
+            // this.users = [
+            //     {
+            //         name: 'Vinuri Prabodhya',
+            //         role: 'Admin',
+            //         email: 'vinuri@gmail.com',
+            //         contact: '0714523963',
+            //         city: 'Colombo',
+            //     },
+            //     {
+            //         name: 'Ravindi Samarawickrama',
+            //         role: 'Customer',
+            //         email: 'ravi@gmail.com',
+            //         contact: '0775625369',
+            //         city: 'Colombo',
+            //     },
+            //     {
+            //         name: 'John De Silva',
+            //         role: 'Seller',
+            //         email: 'john@gmail.com',
+            //         contact: '0774585963',
+            //         city: 'Colombo',
+            //     },
+            //
+            //
+            // ]
 
 
-            ]
+
+
         },
 
         editItem (item) {

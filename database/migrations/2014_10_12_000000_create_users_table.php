@@ -17,6 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('nic');
+            $table->string('contact_no');
+            $table->string('city');
+            $table->string('address');
+            $table->string('postal_code');
+            $table->string('birthday');
+            $table->string('gender');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 

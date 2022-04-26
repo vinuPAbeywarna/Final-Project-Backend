@@ -87,9 +87,6 @@
 
                                             </v-row>
                                         </v-container>
-
-                                    </v-form>
-
                                         <v-row>
                                             <v-col cols="12">
                                                 <v-text-field
@@ -132,15 +129,18 @@
                                             </v-col>
                                         </v-row>
 
-                                    <v-card-actions class="justify-center">
-                                        <v-btn
-                                            color="blue darken-1"
-                                            text
+                                        <v-card-actions class="justify-center">
+                                            <v-btn
+                                                color="blue darken-1"
+                                                text
 
-                                        >
-                                            Save
-                                        </v-btn>
-                                    </v-card-actions>
+                                            >
+                                                Save
+                                            </v-btn>
+                                        </v-card-actions>
+
+                                    </v-form>
+
 
                                 </v-card>
 
@@ -176,14 +176,8 @@ export default {
         gender:'Female',
 
     }),
+    name: "UserProfile"
 
-
-
-    methods: {
-
-
-        name: "UserProfile"
-    }
 
 
 }

@@ -9,3 +9,5 @@ Route::post('/auth/register', [AuthController::class,'Register']);
 Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/auth/check', [AuthController::class,'Check']);
 });
+
+Route::post('/user-details/GetUsers', [UserController::class,'GetUsers']);

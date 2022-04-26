@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use mysql_xdevapi\Table;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,6 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable implements JWTSubject
 {
+    protected $table = 'users';
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $guarded = [];

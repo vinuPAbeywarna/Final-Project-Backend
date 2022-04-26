@@ -9,7 +9,6 @@
     "/js/WishList.js": "/js/WishList.js",
     "/js/Products.js": "/js/Products.js",
     "/js/Shops.js": "/js/Shops.js",
-    "/css/app.css": "/css/app.css",
     "/js/Dashboard.js": "/js/Dashboard.js",
     "/js/ProductList.js": "/js/ProductList.js",
     "/js/Orders.js": "/js/Orders.js",
@@ -19,5 +18,6 @@
     "/js/leatherItemShop.js": "/js/leatherItemShop.js",
     "/js/CheckoutPage.js": "/js/CheckoutPage.js",
     "/js/ArtAndCraftKitsShop.js": "/js/ArtAndCraftKitsShop.js",
-    "/js/ArtAndCraftShop.js": "/js/ArtAndCraftShop.js"
+    "/js/ArtAndCraftShop.js": "/js/ArtAndCraftShop.js",
+    "/css/app.css": "/css/app.css"
 }

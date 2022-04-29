@@ -209,6 +209,8 @@
 </template>
 
 <script>
+import {authClient} from "../Plugins/client";
+
 export default {
     data: () => ({
         dialog: false,
@@ -220,11 +222,10 @@ export default {
                 sortable: false,
                 value: 'image',
             },
-            { text: 'Product Id', value: 'product_id' },
+            { text: 'Product Id', value: 'id' },
             { text: 'Category', value: 'category' },
             { text: 'Price', value: 'price' },
-            { text: 'Stock', value: 'stocks' },
-            { text: 'Sales', value: 'sales' },
+            { text: 'Stock', value: 'stock' },
             { text: 'Actions', value: 'actions', sortable: false,  },
         ],
         users: [],
@@ -232,19 +233,19 @@ export default {
         editedIndex: -1,
         editedItem: {
             image: '',
-            product_id: '',
+            id: '',
             category: '',
             price: '',
-            stocks: '',
-            sales:'',
+            stock: '',
+
         },
         defaultItem: {
             image: '',
-            product_id: '',
+            id: '',
             category: '',
             price: '',
-            stocks: '',
-            sales:'',
+            stock: '',
+
         },
     }),
 
@@ -264,39 +265,50 @@ export default {
     },
 
     created () {
-        this.initialize()
+        // this.initialize()
+        this.GetProduct();
     },
 
     methods: {
+        GetProduct(){
+            authClient.get('api/product-list/GetProduct')
+            .then((response)=>{
+                console.log(response)
+                this.users = response.data.users
+                }
+
+            );
+
+        },
         initialize () {
-            this.users = [
-                {
-                    image: 'Vinuri Prabodhya',
-                    product_id: 'Admin',
-                    category: 'vinuri@gmail.com',
-                    price: '0714523963',
-                    stocks: 'Colombo',
-                    sales:'100',
-                },
-                {
-                    image: 'Vinuri Prabodhya',
-                    product_id: 'Admin',
-                    category: 'vinuri@gmail.com',
-                    price: '0714523963',
-                    stocks: 'Colombo',
-                    sales:'100',
-                },
-                {
-                    image: 'Vinuri Prabodhya',
-                    product_id: 'Admin',
-                    category: 'vinuri@gmail.com',
-                    price: '0714523963',
-                    stocks: 'Colombo',
-                    sales:'100',
-                },
-
-
-            ]
+            // this.users = [
+            //     {
+            //         image: 'Vinuri Prabodhya',
+            //         product_id: 'Admin',
+            //         category: 'vinuri@gmail.com',
+            //         price: '0714523963',
+            //         stocks: 'Colombo',
+            //         sales:'100',
+            //     },
+            //     {
+            //         image: 'Vinuri Prabodhya',
+            //         product_id: 'Admin',
+            //         category: 'vinuri@gmail.com',
+            //         price: '0714523963',
+            //         stocks: 'Colombo',
+            //         sales:'100',
+            //     },
+            //     {
+            //         image: 'Vinuri Prabodhya',
+            //         product_id: 'Admin',
+            //         category: 'vinuri@gmail.com',
+            //         price: '0714523963',
+            //         stocks: 'Colombo',
+            //         sales:'100',
+            //     },
+            //
+            //
+            // ]
         },
 
         editItem (item) {

@@ -88,7 +88,7 @@
                                                         md="4"
                                                     >
                                                         <v-text-field
-                                                            v-model="editedItem.item_detail"
+                                                            v-model="editedItem.item_name"
                                                             label="User Role"
                                                         ></v-text-field>
                                                     </v-col>
@@ -139,6 +139,8 @@
 </template>
 
 <script>
+import {authClient} from "../Plugins/client";
+
 export default {
     data: () => ({
         dialog: false,
@@ -149,7 +151,7 @@ export default {
                 sortable: false,
                 value: 'order_id',
             },
-            { text: 'Item Detail', value: 'item_detail' },
+            { text: 'Item Detail', value: 'item_name' },
             { text: 'Status', value: 'status' },
             { text: 'Price', value: 'price' },
 
@@ -159,14 +161,14 @@ export default {
         editedIndex: -1,
         editedItem: {
             order_id: '',
-            item_detail: '',
+            item_name: '',
             status: '',
             price: '',
 
         },
         defaultItem: {
             order_id: '',
-            item_detail: '',
+            item_name: '',
             status: '',
             price: '',
         },
@@ -181,34 +183,42 @@ export default {
     },
 
     created () {
-        this.initialize()
+        // this.initialize()
+        this.getOrders();
     },
 
     methods: {
+        getOrders(){
+            authClient.post('api/orders/getOrders')
+            .then((response) => {
+                console.log(response)
+                this.users = response.data.users
+                });
+        },
         initialize () {
-            this.users = [
-                {
-                    order_id: '#001',
-                    item_detail: 'handloom Materials',
-                    status: 'Shipped',
-                    price: 'Rs.1000',
-
-                },
-                {
-                    order_id: '#002',
-                    item_detail: 'Portrait art',
-                    status: 'Pending',
-                    price: 'Rs.5000',
-                },
-                {
-                    order_id: '#003',
-                    item_detail: 'Wooden chair',
-                    status: 'Confirm',
-                    price: 'Rs.15000',
-                },
-
-
-            ]
+            // this.users = [
+            //     {
+            //         order_id: '#001',
+            //         item_detail: 'handloom Materials',
+            //         status: 'Shipped',
+            //         price: 'Rs.1000',
+            //
+            //     },
+            //     {
+            //         order_id: '#002',
+            //         item_detail: 'Portrait art',
+            //         status: 'Pending',
+            //         price: 'Rs.5000',
+            //     },
+            //     {
+            //         order_id: '#003',
+            //         item_detail: 'Wooden chair',
+            //         status: 'Confirm',
+            //         price: 'Rs.15000',
+            //     },
+            //
+            //
+            // ]
         },
 
 

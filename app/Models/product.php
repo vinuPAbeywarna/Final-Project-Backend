@@ -15,6 +15,7 @@ class product extends Model
         'address',
         'stock',
         'price',
+        'category',
         'country',
         'image'
 

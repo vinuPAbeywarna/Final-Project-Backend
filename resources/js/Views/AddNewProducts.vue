@@ -84,9 +84,8 @@
                 <v-card class="mt-8 " width="1500" dense ref="form">
                     <v-card-text>
                         <v-text-field
-                            ref="name"
+
                             v-model="product.product_name"
-                            :rules="[() => !!product_name || 'This field is required']"
                             :error-messages="errorMessages"
                             label="Product Name"
                             required
@@ -94,13 +93,9 @@
                             outlined
                         ></v-text-field>
                         <v-text-field
-                            ref="address"
+
                             v-model="product.address"
-                            :rules="[
-              () => !!address || 'This field is required',
-              () => !!address && address.length <= 25 || 'Address must be less than 25 characters',
-              addressCheck
-            ]"
+
                             label="Seller Address"
                             counter="25"
                             required
@@ -108,9 +103,9 @@
                             dense
                         ></v-text-field>
                         <v-text-field
-                            ref="state"
+
                             v-model="product.seller_name"
-                            :rules="[() => !!seller_name || 'This field is required']"
+
                             label="Seller Name"
                             required
                             dense
@@ -118,9 +113,9 @@
 
                         ></v-text-field>
                         <v-text-field
-                            ref="state"
+
                             v-model="product.stock"
-                            :rules="[() => !!stock || 'This field is required']"
+
                             label="Available Stock"
                             required
                             outlined
@@ -128,9 +123,9 @@
 
                         ></v-text-field>
                         <v-text-field
-                            ref="zip"
+
                             v-model="product.price"
-                            :rules="[() => !!price || 'This field is required']"
+
                             label="Product Price"
                             required
                             outlined
@@ -139,9 +134,9 @@
 
 
                         <v-autocomplete
-                            ref="country"
+
                             v-model="product.country"
-                            :rules="[() => !!country || 'This field is required']"
+
                             :items="countries"
                             label="Country"
                             outlined
@@ -149,7 +144,8 @@
                             required
                         ></v-autocomplete>
                         <v-file-input
-                            :rules="rules"
+
+                            v-model="product.image"
                             accept="image/png, image/jpeg, image/bmp"
                             placeholder="Choose Image"
                             prepend-icon="mdi-camera"
@@ -167,8 +163,7 @@
                         <v-slide-x-reverse-transition>
                             <v-tooltip
                                 v-if="formHasErrors"
-                                left
-                            >
+                                left>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn
                                         icon
@@ -186,7 +181,7 @@
                         <v-btn
                             color="primary"
                             text
-                            @click="submit"
+                            type="submit"
                         >
                             Submit
                         </v-btn>
@@ -202,28 +197,24 @@
 
 
 
+import {authClient} from "../Plugins/client";
+
 export default {
     data: () => ({
-        'product':{
-            'id':'',
-            'product_name':'',
-            'seller_name':'',
-            'address':'',
-            'stock':'',
-            'price':'',
-            'country':'',
-            'image':'',
+        product:{
+            id:'',
+            product_name:'',
+            seller_name:'',
+            address:'',
+            stock:'',
+            price:'',
+            country:'',
+            image:'',
 
         },
         countries: ['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Anguilla', 'Antigua &amp; Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bosnia &amp; Herzegovina', 'Botswana', 'Brazil', 'British Virgin Islands', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Cape Verde', 'Cayman Islands', 'Chad', 'Chile', 'China', 'Colombia', 'Congo', 'Cook Islands', 'Costa Rica', 'Cote D Ivoire', 'Croatia', 'Cruise Ship', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Estonia', 'Ethiopia', 'Falkland Islands', 'Faroe Islands', 'Fiji', 'Finland', 'France', 'French Polynesia', 'French West Indies', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Greece', 'Greenland', 'Grenada', 'Guam', 'Guatemala', 'Guernsey', 'Guinea', 'Guinea Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya', 'Kuwait', 'Kyrgyz Republic', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macau', 'Macedonia', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Mauritania', 'Mauritius', 'Mexico', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Montserrat', 'Morocco', 'Mozambique', 'Namibia', 'Nepal', 'Netherlands', 'Netherlands Antilles', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Norway', 'Oman', 'Pakistan', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Reunion', 'Romania', 'Russia', 'Rwanda', 'Saint Pierre &amp; Miquelon', 'Samoa', 'San Marino', 'Satellite', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'South Africa', 'South Korea', 'Spain', 'Sri Lanka', 'St Kitts &amp; Nevis', 'St Lucia', 'St Vincent', 'St. Lucia', 'Sudan', 'Suriname', 'Swaziland', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', `Timor L'Este`, 'Togo', 'Tonga', 'Trinidad &amp; Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks &amp; Caicos', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Venezuela', 'Vietnam', 'Virgin Islands (US)', 'Yemen', 'Zambia', 'Zimbabwe'],
         errorMessages: '',
-        product_name: null,
-        address: null,
-        city: null,
-        seller_name: null,
-        stock:null,
-        price: null,
-        country: null,
+
         formHasErrors: false,
         image:'',
         rules: [
@@ -246,6 +237,9 @@ export default {
             }
         },
     },
+    created() {
+        this.SaveData();
+    },
 
     watch: {
         name () {
@@ -255,7 +249,11 @@ export default {
 
     methods: {
         SaveData(){
-            console.log("here we go");
+            authClient.post('api/add-new-products/SaveData')
+            .then((response) => {
+                console.log(response)
+                this.product = response.data.product
+            });
 
         },
         addressCheck () {

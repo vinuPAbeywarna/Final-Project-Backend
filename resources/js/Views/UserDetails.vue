@@ -9,7 +9,7 @@
             xl="12"
         >
 
-                        <v-toolbar-title class="font-weight-regular mt-5 ml-4">User Details</v-toolbar-title>
+                        <v-toolbar-title class="font-weight-regular mt-5 ml-4">User Details </v-toolbar-title>
 
 
                         <v-row class="pa-4 pb-0">
@@ -81,58 +81,61 @@
 
                                                     <v-card-text>
                                                         <v-container>
-                                                            <v-row>
-                                                                <v-col
-                                                                    cols="12"
-                                                                    sm="6"
-                                                                    md="4"
-                                                                >
-                                                                    <v-text-field
-                                                                        v-model="editedItem.name"
-                                                                        label="Name"
-                                                                    ></v-text-field>
-                                                                </v-col>
-                                                                <v-col
-                                                                    cols="12"
-                                                                    sm="6"
-                                                                    md="4"
-                                                                >
-                                                                    <v-text-field
-                                                                        v-model="editedItem.role"
-                                                                        label="User Role"
-                                                                    ></v-text-field>
-                                                                </v-col>
-                                                                <v-col
-                                                                    cols="12"
-                                                                    sm="6"
-                                                                    md="4"
-                                                                >
-                                                                    <v-text-field
-                                                                        v-model="editedItem.email"
-                                                                        label="Email"
-                                                                    ></v-text-field>
-                                                                </v-col>
-                                                                <v-col
-                                                                    cols="12"
-                                                                    sm="6"
-                                                                    md="4"
-                                                                >
-                                                                    <v-text-field
-                                                                        v-model="editedItem.contact_no"
-                                                                        label="Contact Details"
-                                                                    ></v-text-field>
-                                                                </v-col>
-                                                                <v-col
-                                                                    cols="12"
-                                                                    sm="6"
-                                                                    md="4"
-                                                                >
-                                                                    <v-text-field
-                                                                        v-model="editedItem.city"
-                                                                        label="City"
-                                                                    ></v-text-field>
-                                                                </v-col>
-                                                            </v-row>
+                                                            <v-form @submit.prevent="AddUser">
+                                                                <v-row>
+                                                                    <v-col
+                                                                        cols="12"
+                                                                        sm="6"
+                                                                        md="4"
+                                                                    >
+                                                                        <v-text-field
+                                                                            v-model="editedItem.name"
+                                                                            label="Name"
+                                                                        ></v-text-field>
+                                                                    </v-col>
+                                                                    <v-col
+                                                                        cols="12"
+                                                                        sm="6"
+                                                                        md="4"
+                                                                    >
+                                                                        <v-text-field
+                                                                            v-model="editedItem.role"
+                                                                            label="User Role"
+                                                                        ></v-text-field>
+                                                                    </v-col>
+                                                                    <v-col
+                                                                        cols="12"
+                                                                        sm="6"
+                                                                        md="4"
+                                                                    >
+                                                                        <v-text-field
+                                                                            v-model="editedItem.email"
+                                                                            label="Email"
+                                                                        ></v-text-field>
+                                                                    </v-col>
+                                                                    <v-col
+                                                                        cols="12"
+                                                                        sm="6"
+                                                                        md="4"
+                                                                    >
+                                                                        <v-text-field
+                                                                            v-model="editedItem.contact_no"
+                                                                            label="Contact Details"
+                                                                        ></v-text-field>
+                                                                    </v-col>
+                                                                    <v-col
+                                                                        cols="12"
+                                                                        sm="6"
+                                                                        md="4"
+                                                                    >
+                                                                        <v-text-field
+                                                                            v-model="editedItem.city"
+                                                                            label="City"
+                                                                        ></v-text-field>
+                                                                    </v-col>
+                                                                </v-row>
+                                                            </v-form>
+
                                                         </v-container>
                                                     </v-card-text>
 
@@ -148,7 +151,9 @@
                                                         <v-btn
                                                             color="blue darken-1"
                                                             text
+                                                            type="submit"
                                                             @click="save"
+
                                                         >
                                                             Save
                                                         </v-btn>
@@ -207,6 +212,8 @@
 </template>
 
 <script>
+import {authClient} from "../Plugins/client";
+
 export default {
     data: () => ({
         dialog: false,
@@ -225,6 +232,8 @@ export default {
             { text: 'Actions', value: 'actions', sortable: false,  },
         ],
         users: [],
+        editItem:[],
+
         UserRole:[
             'Admin',
             'Seller',
@@ -266,18 +275,24 @@ export default {
     created () {
         // this.initialize();
         this.GetUsers();
+        this.AddUser();
     },
 
     methods: {
         GetUsers() {
-            axios
-                .get('/user-details/GetUsers')
+            authClient.get('api/user-details/GetUsers')
                 .then((response) => {
+                    console.log(response)
                     this.users = response.data.users
-                    console.log(response.data.users)
-                })
-                .catch(error => console.log(error))
+                });
+        },
 
+        AddUser(){
+            authClient.post('api/user-details/AddUser',this.editedItem)
+            .then((response)=>{
+                console.log(response)
+                this.editedItem = response.data.editedItem
+            });
         },
         initialize () {
 

@@ -5,30 +5,47 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function GetUsers():JsonResponse{
+    public function GetUsers(): JsonResponse
+    {
         try {
             $data = User::all();
             return response()->json(['users' => $data]);
-        }catch (\Exception $e){
-            return response()->json($e->getMessage(),200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 200);
         }
     }
 
-    public function AddUser(Request $request)
+    public function AddEditUser(Request $request): JsonResponse
     {
-        $post = new User([
-            'name' => $request->input('name'),
-            'role' => $request->input('role'),
-            'email' => $request->input('email'),
-            'contact_no' => $request->input('contact_no'),
-            'city' => $request->input('city'),
-        ]);
-        $post->save();
 
-        return response()->json('The User successfully added');
+        try {
+            User::updateOrCreate(
+                ['id' => $request->get('id')],
+                [
+                    'name' => $request->get('name'),
+                    'email' => $request->get('email'),
+                    'nic' => $request->get('nic'),
+                    'password' => Hash::make($request->get('password')),
+                    'contact_no' => $request->get('contact_no'),
+                    'city' => $request->get('city'),
+                    'birthday' => $request->get('birthday'),
+                    'address' => $request->get('address'),
+                    'gender' => $request->get('gender'),
+                    'role' => $request->get('role'),
+                ]);
+
+            return response()->json('The User successfully added');
+        } catch (\Throwable $t) {
+            return response()->json([
+                'error' => $t->getMessage()
+            ]);
+        }
+
+
     }
 
 

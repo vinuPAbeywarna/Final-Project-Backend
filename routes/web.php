@@ -19,7 +19,7 @@ Route::get('/seller-account-approval', function () {
 })->name('SellerAccountApproval');
 
 Route::get('/user-details', function () {
-    return view('App');
+   return view('App');
 })->name('UserDetails');
 
 Route::get('/cart', function () {

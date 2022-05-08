@@ -1,259 +1,67 @@
 <template>
-    <v-row>
-        <v-col
-            cols="12"
-            xs="12"
-            sm="12"
-            md="12"
-            lg="12"
-            xl="12"
-        >
 
-            <v-toolbar-title class="font-weight-regular mt-5 ml-4">User Details </v-toolbar-title>
+    <v-container>
+        <h3>Users Details</h3>
 
+        <v-row no-gutters class="mb-4 mt-3">
 
-                        <v-row class="pa-4 pb-0">
-                            <v-col
-                                cols="12"
-                                xs="5"
-                                sm="5"
-                                md="5"
-                                lg="5"
-                                xl="5"
-                            >
-                                <v-combobox
-                                    clearable
-                                    :items="UserRole"
-                                    dense
-                                    label="User Tpye "
-                                    x-small
-                                    outlined
-                                class="ml-9">
-                                </v-combobox>
-                            </v-col>
+            <v-spacer/>
+            <v-btn to="/add-new-users" color="primary">Add New User</v-btn>
+        </v-row>
 
-                            <v-col
-                                cols="12"
-                                xs="2"
-                                sm="2"
-                                md="2"
-                                lg="2"
-                                xl="2"
-                            >
-                                <v-btn class=" " dark color="light-blue darken-4"  solo dense  >
-                                    <v-icon small dark left>mdi-check-decagram</v-icon> Filter
-                                </v-btn>
-                            </v-col>
-                            <v-container>
-                                <v-data-table
-                                    :headers="headers"
-                                    :items="users"
-                                    sort-by="calories"
-                                    class="elevation-1"
-                                    dense
-                                >
-                                    <template v-slot:top>
-                                        <v-toolbar
-                                            flat
-                                        >
+        <v-card>
+            <v-card-title>
+                <v-text-field dense v-model="userSearch" outlined label="Search..."></v-text-field>
+            </v-card-title>
 
-                                            <v-spacer></v-spacer>
-                                            <v-dialog
-                                                v-model="dialog"
-                                                max-width="500px"
-                                            >
-                                                <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn
-                                                        color="light-blue darken-4"
-                                                        dark
-                                                        class="mb-2"
-                                                        v-bind="attrs"
-                                                        v-on="on"
-                                                        v-if="$store.state.User.role === 'admin'"
+            <v-card-text>
+                <v-data-table
+                    :headers="headers"
+                    :items="users"
+                    :search="userSearch"
+                    sort-by="calories"
+                >
+                    <template v-slot:item.actions="{ item }" v-if="$store.state.User.role === 'admin'">
+                        <v-icon
+                            small
+                            class="mr-2"
+                            @click="editUser(item)"
+                            v-if="$store.state.User.role === 'admin'"
+                        >
+                            mdi-pencil
+                        </v-icon>
+                        <v-icon
+                            small
+                            @click="deleteItem(item)"
+                            v-if="$store.state.User.role === 'admin'"
+                        >
+                            mdi-delete
+                        </v-icon>
+                    </template>
 
-                                                    >
-                                                        New User
-                                                    </v-btn>
-                                                </template>
-                                                <v-card>
-                                                    <v-card-title>
-                                                        <span class="text-h5">{{ formTitle }}</span>
-                                                    </v-card-title>
+                </v-data-table>
+            </v-card-text>
+        </v-card>
 
-                                                    <v-card-text>
-                                                        <v-container>
-                                                            <v-form @submit.prevent="AddUser">
-                                                                <v-row>
-                                                                    <v-col
-                                                                        cols="12"
-                                                                        sm="6"
-                                                                        md="4"
-                                                                    >
-                                                                        <v-text-field
-                                                                            v-model="editedItem.id"
-                                                                            label="Name"
-                                                                        ></v-text-field>
-                                                                    </v-col>
-                                                                    <v-col
-                                                                        cols="12"
-                                                                        sm="6"
-                                                                        md="4"
-                                                                    >
-                                                                        <v-text-field
-                                                                            v-model="editedItem.name"
-                                                                            label="Name"
-                                                                        ></v-text-field>
-                                                                    </v-col>
+        <v-dialog max-width="768" v-model="AddEditUser" v-if="AddEditUser">
+            <AddNewUserDetails @close="Close" :userdata="EditUserData" :edit="IsEditMode" />
+        </v-dialog>
 
-                                                                    <v-col
-                                                                        cols="12"
-                                                                        sm="6"
-                                                                        md="4"
-                                                                    >
-                                                                        <v-text-field
-                                                                            v-model="editedItem.email"
-                                                                            label="Email"
-                                                                        ></v-text-field>
-                                                                    </v-col>
-                                                                    <v-col
-                                                                        cols="12"
-                                                                        sm="6"
-                                                                        md="4"
-                                                                    >
-                                                                        <v-text-field
-                                                                            v-model="editedItem.nic"
-                                                                            label="NIC"
-                                                                        ></v-text-field>
-                                                                    </v-col>
-                                                                    <v-col
-                                                                        cols="12"
-                                                                        sm="6"
-                                                                        md="4"
-                                                                    >
-                                                                        <v-text-field
-                                                                            v-model="editedItem.contact_no"
-                                                                            label="Contact Details"
-                                                                        ></v-text-field>
-                                                                    </v-col>
-                                                                    <v-col
-                                                                        cols="12"
-                                                                        sm="6"
-                                                                        md="4"
-                                                                    >
-                                                                        <v-text-field
-                                                                            v-model="editedItem.city"
-                                                                            label="City"
-                                                                        ></v-text-field>
-                                                                    </v-col>
-                                                                    <v-col
-                                                                        cols="12"
-                                                                        sm="6"
-                                                                        md="4"
-                                                                    >
-                                                                        <v-text-field
-                                                                            v-model="editedItem.birthday"
-                                                                            label="Birthday"
-                                                                        ></v-text-field>
-                                                                    </v-col>
-                                                                    <v-col
-                                                                        cols="12"
-                                                                        sm="6"
-                                                                        md="4"
-                                                                    >
-                                                                        <v-text-field
-                                                                            v-model="editedItem.gender"
-                                                                            label="Gender"
-                                                                        ></v-text-field>
-                                                                    </v-col>
-                                                                    <v-col
-                                                                        cols="12"
-                                                                        sm="6"
-                                                                        md="4"
-                                                                    >
-                                                                        <v-text-field
-                                                                            v-model="editedItem.role"
-                                                                            label="User Role"
-                                                                        ></v-text-field>
-                                                                    </v-col>
-                                                                </v-row>
-                                                            </v-form>
-
-                                                        </v-container>
-                                                    </v-card-text>
-
-                                                    <v-card-actions>
-                                                        <v-spacer></v-spacer>
-                                                        <v-btn
-                                                            color="blue darken-1"
-                                                            text
-                                                            @click="close"
-                                                        >
-                                                            Cancel
-                                                        </v-btn>
-                                                        <v-btn
-                                                            color="blue darken-1"
-                                                            text
-                                                            type="submit"
-                                                            @submit="AddUser"
-
-
-                                                        >
-                                                            Save
-                                                        </v-btn>
-                                                    </v-card-actions>
-                                                </v-card>
-                                            </v-dialog>
-                                            <v-dialog v-model="dialogDelete" max-width="500px">
-                                                <v-card>
-                                                    <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
-                                                    <v-card-actions>
-                                                        <v-spacer></v-spacer>
-                                                        <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                                                        <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-                                                        <v-spacer></v-spacer>
-                                                    </v-card-actions>
-                                                </v-card>
-                                            </v-dialog>
-                                        </v-toolbar>
-                                    </template>
-                                    <template v-slot:item.actions="{ item }" v-if="$store.state.User.role === 'admin'">
-                                        <v-icon
-                                            small
-                                            class="mr-2"
-                                            @click="editItem(item)"
-                                            v-if="$store.state.User.role === 'admin'"
-                                        >
-                                            mdi-pencil
-                                        </v-icon>
-                                        <v-icon
-                                            small
-                                            @click="deleteItem(item)"
-                                            v-if="$store.state.User.role === 'admin'"
-                                        >
-                                            mdi-delete
-                                        </v-icon>
-                                    </template>
-
-                                </v-data-table>
-                            </v-container>
-                        </v-row>
-
-
-        </v-col>
-
-
-
-
-    </v-row>
+    </v-container>
 </template>
 
 <script>
 import {authClient} from "../Plugins/client";
+import AddNewUserDetails from "./AddNewUserDetails";
 
 export default {
+    components: {AddNewUserDetails},
     data: () => ({
-        dialog: false,
+        AddEditUser: false,
         dialogDelete: false,
+        EditUserData:null,
+        IsEditMode:false,
+        userSearch: '',
         headers: [
             {
                 text: 'Id',
@@ -268,19 +76,19 @@ export default {
                 value: 'name',
             },
 
-            { text: 'Email', value: 'email' },
-            { text: 'NIC', value: 'nic' },
-            { text: 'Contact Number', value: 'contact_no' },
-            { text: 'City', value: 'city' },
-            { text: 'Birthday', value: 'birthday' },
-            { text: 'Gender', value: 'gender' },
-            { text: 'User Role', value: 'role' },
-            { text: 'Actions', value: 'actions', sortable: false,  },
+            {text: 'Email', value: 'email'},
+            {text: 'NIC', value: 'nic'},
+            {text: 'Contact Number', value: 'contact_no'},
+            {text: 'City', value: 'city'},
+            {text: 'Birthday', value: 'birthday'},
+            {text: 'Gender', value: 'gender'},
+            {text: 'User Role', value: 'role'},
+            {text: 'Actions', value: 'actions', sortable: false,},
         ],
         users: [],
-        editItem:[],
+        editItem: [],
 
-        UserRole:[
+        UserRole: [
             'Admin',
             'Seller',
             'Customer',
@@ -288,52 +96,48 @@ export default {
         ],
         editedIndex: -1,
         editedItem: {
-            id:'',
+            id: '',
             name: '',
             email: '',
-            nic:'',
+            nic: '',
             contact_no: '',
             city: '',
-            birthday:'',
-            gender:'',
+            birthday: '',
+            gender: '',
             role: '',
-
-
 
 
         },
         defaultItem: {
-            id:'',
+            id: '',
             name: '',
             email: '',
-            nic:'',
+            nic: '',
             contact_no: '',
             city: '',
-            birthday:'',
-            gender:'',
+            birthday: '',
+            gender: '',
             role: '',
         },
     }),
 
     computed: {
-        formTitle () {
+        formTitle() {
             return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
         },
     },
 
     watch: {
-        dialog (val) {
+        dialog(val) {
             val || this.close()
         },
-        dialogDelete (val) {
+        dialogDelete(val) {
             val || this.closeDelete()
         },
     },
 
-    created () {
-        // this.initialize();
+    mounted() {
         this.GetUsers();
-        this.AddUser();
     },
 
     methods: {
@@ -344,73 +148,31 @@ export default {
                     this.users = response.data.users
                 });
         },
-
-        AddUser(){
-            authClient.post('api/user-details/AddUser')
-            .then((response)=>{
-                console.log(response)
-                this.editedItem = response.data.editedItem
-            });
-        },
-        initialize () {
-
-            // this.users = [
-            //     {
-            //         name: 'Vinuri Prabodhya',
-            //         role: 'Admin',
-            //         email: 'vinuri@gmail.com',
-            //         contact: '0714523963',
-            //         city: 'Colombo',
-            //     },
-            //     {
-            //         name: 'Ravindi Samarawickrama',
-            //         role: 'Customer',
-            //         email: 'ravi@gmail.com',
-            //         contact: '0775625369',
-            //         city: 'Colombo',
-            //     },
-            //     {
-            //         name: 'John De Silva',
-            //         role: 'Seller',
-            //         email: 'john@gmail.com',
-            //         contact: '0774585963',
-            //         city: 'Colombo',
-            //     },
-            //
-            //
-            // ]
-
-
-
-
+        editUser(item) {
+           this.EditUserData = item;
+           this.IsEditMode = true;
+           this.AddEditUser = true;
         },
 
-        editItem (item) {
-            this.editedIndex = this.users.indexOf(item)
-            this.editedItem = Object.assign({}, item)
-            this.dialog = true
-        },
-
-        deleteItem (item) {
+        deleteItem(item) {
             this.editedIndex = this.users.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialogDelete = true
         },
 
-        deleteItemConfirm () {
+        deleteItemConfirm() {
             this.users.splice(this.editedIndex, 1)
             this.closeDelete()
         },
 
-        close () {
-            this.dialog = false
-            this.$nextTick(() => {
-                this.editedItem = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-            })
+        Close() {
+            this.dialog = false;
+            this.EditUserData = null;
+            this.IsEditMode = false;
+            this.AddEditUser = false;
         },
 
-        closeDelete () {
+        closeDelete() {
             this.dialogDelete = false
             this.$nextTick(() => {
                 this.editedItem = Object.assign({}, this.defaultItem)
@@ -418,7 +180,7 @@ export default {
             })
         },
 
-        save () {
+        save() {
             if (this.editedIndex > -1) {
                 Object.assign(this.users[this.editedIndex], this.editedItem)
             } else {

@@ -50,7 +50,7 @@ const routes = [
     { name:'CheckoutPage',path: '/checkout-page', component: CheckoutPage },
     { name:'ArtAndCraftKitsShop',path: '/art-and-craft-kit-shop', component: ArtAndCraftKitsShop },
     { name:'ArtAndCraftShop',path: '/art-and-craft-shop', component: ArtAndCraftShop },
-    { name:'AddNewUserDetails',path: '/add-new-users', component: AddNewUserDetails },
+    { name:'AddNewUserDetails',path: '/add-new-users', component: AddNewUserDetails, props: true },
 
 
 ];

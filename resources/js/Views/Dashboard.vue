@@ -48,7 +48,7 @@
 
         </v-card>
     </v-col>
-    <v-col cols="12" md="6" lg="6" sm="6">
+    <v-col >
         <v-toolbar-title class="ml-4 font-weight-bold " >Recent Orders</v-toolbar-title>
         <v-data-table
             :headers="Order_headers"
@@ -61,19 +61,8 @@
             </template>
         </v-data-table>
     </v-col>
-    <v-col cols="12" md="6" lg="6" sm="6">
-        <v-toolbar-title class="font-weight-bold">Pending Products</v-toolbar-title>
-        <v-data-table
-            :headers="Products_headers"
-            :items="products"
-            class="elevation-1  mr-4"
-        >
-            <template v-slot:header.name="{ header }">
-                {{ header.text.toUpperCase() }}
-            </template>
-        </v-data-table>
-    </v-col>
-    <v-col cols="12" sm="6" class="align-content-sm-center ml-9">
+
+    <v-col cols="12" sm="6" class="align-content-sm-center ml-9 mt-7">
 
             <graphs></graphs>
 

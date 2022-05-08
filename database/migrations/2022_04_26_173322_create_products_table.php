@@ -15,14 +15,12 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('product_name');
-            $table->string('seller_name');
-            $table->string('address');
-            $table->string('stock');
-            $table->string('price');
-            $table->string('category');
-            $table->string('country');
-            $table->string('image');
+            $table->unsignedBigInteger('owner');
+            $table->string('name');
+            $table->double('price');
+            $table->text('description');
+            $table->string('image')->default('https://picsum.photos/256');
+            $table->boolean('approved')->default(true);
             $table->timestamps();
         });
     }

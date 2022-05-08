@@ -6,42 +6,37 @@ use http\Env\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\product;
-use App\Http\Controllers;
-use SebastianBergmann\CodeCoverage\Report\Xml\Project;
+use Illuminate\Support\Facades\Auth;
 
 
 class ProductController extends Controller
 {
-    public function SaveData(Request $request)
-    :JsonResponse{
-        try{
+    public function SaveData(Request $request): JsonResponse
+    {
+        try {
 
             product::create([
-            'id'=> $request->input('id'),
-                'product_name' => $request->input('product_name'),
-                'seller_name'=> $request->input('seller_name'),
-                'address' => $request->input('address'),
-                'stock'=> $request->input('stock'),
-                'price' => $request->input('price'),
-                'country' => $request->input('country'),
-                'image' => $request->input('image'),
-                ]);
+                'owner' => Auth::id(),
+                'name' => $request->get('name'),
+                'description' => $request->get('description'),
+                'price' => $request->get('price'),
+            ]);
 
 
-            return response()->json('product created');
+            return response()->json('Product Created');
 
 
-        }catch (\Exception $e){
-            return response()->json($e->getMessage(),200);
+        } catch (\Throwable $e) {
+            return response()->json($e->getMessage(), 200);
         }
     }
 
-    public function GetProduct():JsonResponse{
-        try{
-            $data = product::all();
-            return response()->json(['users' => $data]);
-        }catch (\Exception $e){
-            return response()->json($e->getMessage(),200);
+    public function GetProduct(): JsonResponse
+    {
+        try {
+            return response()->json(product::with('owner')->get());
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 200);
         }
     }
 

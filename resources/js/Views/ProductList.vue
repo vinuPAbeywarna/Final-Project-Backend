@@ -48,7 +48,7 @@
                 <v-container>
                     <v-data-table
                         :headers="headers"
-                        :items="users"
+                        :items="products"
                         sort-by="calories"
                         class="elevation-1"
                         dense
@@ -216,19 +216,12 @@ export default {
         dialog: false,
         dialogDelete: false,
         headers: [
-            {
-                text: 'Image',
-                align: 'start',
-                sortable: false,
-                value: 'image',
-            },
-            { text: 'Product Id', value: 'id' },
-            { text: 'Category', value: 'category' },
+            { text: 'Name', value: 'name'},
+            { text: 'Description', value: 'description'},
             { text: 'Price', value: 'price' },
-            { text: 'Stock', value: 'stock' },
             { text: 'Actions', value: 'actions', sortable: false,  },
         ],
-        users: [],
+        products: [],
 
         editedIndex: -1,
         editedItem: {
@@ -274,7 +267,7 @@ export default {
             authClient.get('api/product-list/GetProduct')
             .then((response)=>{
                 console.log(response)
-                this.users = response.data.users
+                this.products = response.data;
                 }
 
             );

@@ -16,7 +16,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/add-new-products/SaveData',[ProductController::class,'SaveData']);
     Route::post('/orders/getOrders',[OrdersController::class,'getOrders']);
     Route::get('/product-list/GetProduct',[ProductController::class,'GetProduct']);
-    Route::post('/user-details/AddUser', [UserController::class,'AddUser']);
+    Route::post('/add-new-users/AddEditUser', [UserController::class,'AddEditUser']);
 });
 
 

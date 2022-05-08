@@ -19,7 +19,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'Vinuri',
             'email' => 'admin@vam.lk',
             'password' => Hash::make('password'),
-            'role' => 'admin'
+            'role' => 'admin',
+            'nic'=>'0000',
+            'contact_no'=>'1234',
+            'city'=>'Colombo',
+            'address'=>'Homagama',
+            'birthday'=>'1999/00/00',
+            'gender'=>'Female',
         ]);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use mysql_xdevapi\Table;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,21 +22,6 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
-    ];
-
-    protected $fillable =[
-        'id',
-        'name',
-        'email',
-        'nic',
-        'contact_no',
-        'city',
-        'address',
-        'gender',
-        'email_verified_at',
-        'password',
-        'role'
-
     ];
 
     protected $casts = [

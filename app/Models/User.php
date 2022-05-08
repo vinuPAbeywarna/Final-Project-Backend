@@ -25,6 +25,21 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
+    protected $fillable =[
+        'id',
+        'name',
+        'email',
+        'nic',
+        'contact_no',
+        'city',
+        'address',
+        'gender',
+        'email_verified_at',
+        'password',
+        'role'
+
+    ];
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

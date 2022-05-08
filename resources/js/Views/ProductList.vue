@@ -71,7 +71,7 @@
                                             v-bind="attrs"
                                             v-on="on"
                                             to="/add-new-products"
-                                            v-if="$store.state.User.role === 'admin' && 'seller'"
+                                            v-if="$store.state.User.role === 'admin' || $store.state.User.role ==='seller'"
                                         >
                                             Add New Product
                                         </v-btn>
@@ -82,60 +82,60 @@
                                         </v-card-title>
 
                                         <v-card-text>
-                                            <v-container>
-                                                <v-row>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="editedItem.name"
-                                                            label="Name"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="editedItem.role"
-                                                            label="User Role"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="editedItem.email"
-                                                            label="Email"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="editedItem.contact"
-                                                            label="Contact Details"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="editedItem.city"
-                                                            label="City"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                </v-row>
-                                            </v-container>
+<!--                                            <v-container>-->
+<!--                                                <v-row>-->
+<!--                                                    <v-col-->
+<!--                                                        cols="12"-->
+<!--                                                        sm="6"-->
+<!--                                                        md="4"-->
+<!--                                                    >-->
+<!--                                                        <v-text-field-->
+<!--                                                            v-model="editedItem.name"-->
+<!--                                                            label="Name"-->
+<!--                                                        ></v-text-field>-->
+<!--                                                    </v-col>-->
+<!--                                                    <v-col-->
+<!--                                                        cols="12"-->
+<!--                                                        sm="6"-->
+<!--                                                        md="4"-->
+<!--                                                    >-->
+<!--&lt;!&ndash;                                                        <v-text-field&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            v-model="editedItem.role"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            label="User Role"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        ></v-text-field>&ndash;&gt;-->
+<!--                                                    </v-col>-->
+<!--                                                    <v-col-->
+<!--                                                        cols="12"-->
+<!--                                                        sm="6"-->
+<!--                                                        md="4"-->
+<!--                                                    >-->
+<!--                                                        <v-text-field-->
+<!--                                                            v-model="editedItem.email"-->
+<!--                                                            label="Email"-->
+<!--                                                        ></v-text-field>-->
+<!--                                                    </v-col>-->
+<!--                                                    <v-col-->
+<!--                                                        cols="12"-->
+<!--                                                        sm="6"-->
+<!--                                                        md="4"-->
+<!--                                                    >-->
+<!--                                                        <v-text-field-->
+<!--                                                            v-model="editedItem.contact"-->
+<!--                                                            label="Contact Details"-->
+<!--                                                        ></v-text-field>-->
+<!--                                                    </v-col>-->
+<!--                                                    <v-col-->
+<!--                                                        cols="12"-->
+<!--                                                        sm="6"-->
+<!--                                                        md="4"-->
+<!--                                                    >-->
+<!--                                                        <v-text-field-->
+<!--                                                            v-model="editedItem.city"-->
+<!--                                                            label="City"-->
+<!--                                                        ></v-text-field>-->
+<!--                                                    </v-col>-->
+<!--                                                </v-row>-->
+<!--                                            </v-container>-->
                                         </v-card-text>
 
                                         <v-card-actions>

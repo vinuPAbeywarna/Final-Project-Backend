@@ -21,6 +21,7 @@ const leatherItemShop =() => import(/*webpackChunkName: "leatherItemShop" */ '..
 const CheckoutPage =() => import(/*webpackChunkName: "CheckoutPage" */ '../Views/CheckoutPage');
 const ArtAndCraftKitsShop =() => import(/*webpackChunkName: "ArtAndCraftKitsShop" */ '../Views/ArtAndCraftKitsShop');
 const ArtAndCraftShop =() => import(/*webpackChunkName: "ArtAndCraftShop" */ '../Views/ArtAndCraftShop');
+const AddNewUserDetails =() => import(/*webpackChunkName: "AddNewUserDetails" */ '../Views/AddNewUserDetails');
 
 
 
@@ -49,6 +50,7 @@ const routes = [
     { name:'CheckoutPage',path: '/checkout-page', component: CheckoutPage },
     { name:'ArtAndCraftKitsShop',path: '/art-and-craft-kit-shop', component: ArtAndCraftKitsShop },
     { name:'ArtAndCraftShop',path: '/art-and-craft-shop', component: ArtAndCraftShop },
+    { name:'AddNewUserDetails',path: '/add-new-users', component: AddNewUserDetails },
 
 
 ];

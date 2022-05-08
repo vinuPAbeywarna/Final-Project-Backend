@@ -78,6 +78,10 @@ Route::get('/art-and-craft-shop', function () {
     return view('App');
 })->name('ArtAndCraftShop');
 
+Route::get('/add-new-users', function () {
+    return view('App');
+})->name('AddNewUserDetails');
+
 
 
 

@@ -6,29 +6,17 @@
     >
         <v-fade-transition mode="out-in">
             <v-row>
-                <v-col cols="6">
-                    <v-toolbar-title class="font-weight-bold">Shops</v-toolbar-title>
-                    <v-card to="/art-and-craft-kit-shop">
-                        <v-img
-                            src="https://picsum.photos/350/165?random"
-                            height="125"
-                            class="grey darken-4"
-                        ></v-img>
-                        <v-card-title class="text-h6">
-                            Art And Craft Kits And material Shop
-                        </v-card-title>
-                    </v-card>
-                </v-col>
+
 
                 <v-col cols="6">
-                    <v-card class="mt-7" to="/leather-item-shop">
+                    <v-card class="mt-7 " to="/leather-item-shop">
                         <v-img
                             src="https://picsum.photos/350/165?random"
                             max-height="125"
                             class="grey darken-4"
                         ></v-img>
                         <v-card-title class="text-h6">
-                            Leather Items Shop
+                            Leather Items
                         </v-card-title>
                     </v-card>
                 </v-col>
@@ -47,7 +35,7 @@
 <!--                </v-col>-->
 
                 <v-col cols="6">
-                    <v-card to="/art-and-craft-shop">
+                    <v-card class="mt-7" to="/art-and-craft-shop">
                         <v-img
                             src="https://picsum.photos/350/165?random"
                             max-height="125"

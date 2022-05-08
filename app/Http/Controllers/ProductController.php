@@ -12,12 +12,12 @@ use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 class ProductController extends Controller
 {
-    public function SaveData(Request $request):JsonResponse{
+    public function SaveData(Request $request)
+    :JsonResponse{
         try{
 
-
-            $request= new product([
-                'id'=> $request->input('id'),
+            product::create([
+            'id'=> $request->input('id'),
                 'product_name' => $request->input('product_name'),
                 'seller_name'=> $request->input('seller_name'),
                 'address' => $request->input('address'),
@@ -25,10 +25,8 @@ class ProductController extends Controller
                 'price' => $request->input('price'),
                 'country' => $request->input('country'),
                 'image' => $request->input('image'),
+                ]);
 
-
-            ]);
-            $request->save();
 
             return response()->json('product created');
 

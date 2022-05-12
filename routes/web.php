@@ -30,9 +30,15 @@ Route::get('/wish-list', function () {
     return view('App');
 })->name('WishList');
 
+Route::get('/products/{id}', function () {
+    return view('App');
+})->name('Product');
+
 Route::get('/products', function () {
     return view('App');
 })->name('Products');
+
+
 
 Route::get('/shops', function () {
     return view('App');

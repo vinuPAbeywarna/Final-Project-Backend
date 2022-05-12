@@ -36,4 +36,67 @@ class OrdersController extends Controller
             ],200);
         }
     }
+
+    public function GetFinishOrder ():JsonResponse
+    {
+        try {
+            $data = Orders::where('status', '=', 'confirm')->get();
+           $order =Orders::all();
+            return response()->json(['orders' =>$data,'orders'=>$order]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 200);
+        }
+    }
+
+
+    public function UpdateOrder($id): JsonResponse
+    {
+        try {
+
+            $oder=Orders::find($id);
+            $oder->update([
+                    'status'=>true,
+                ]
+
+            );
+
+            return  response()->json(
+            ['status: ok']  ,200);
+
+        } catch (\Exception $e){
+            return response()->json([
+                'error'=>$e->getMessage()
+            ],400);
+        }
+    }
+
+
+    public function getOrdersHistory(): JsonResponse
+    {
+        try{
+            $data = Orders::orderBy('status','desc')->get();
+
+
+            return response()->json(['orders' =>$data]);
+
+        }catch (\Exception $e) {
+            return response()->json($e->getMessage(), 200);
+//                'orders'=>Orders::with('seller')->get()
+
+        }
+    }
+
+    public function DisplayAllOrder():JsonResponse
+    {
+        try {
+            $counter = Orders::count('id')->get();
+            return response()->json(['orders' => $counter]);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 200);
+        }
+    }
+
+
 }

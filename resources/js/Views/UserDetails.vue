@@ -10,9 +10,11 @@
         </v-row>
 
         <v-card>
+
             <v-card-title>
                 <v-text-field dense v-model="userSearch" outlined label="Search..."></v-text-field>
             </v-card-title>
+
 
             <v-card-text>
                 <v-data-table
@@ -32,7 +34,7 @@
                         </v-icon>
                         <v-icon
                             small
-                            @click="deleteItem(item)"
+                            @click="DeleteUser(item)"
                             v-if="$store.state.User.role === 'admin'"
                         >
                             mdi-delete
@@ -148,6 +150,17 @@ export default {
                     this.users = response.data.users
                 });
         },
+
+
+        DeleteUser(item){
+            authClient.delete('api/user-details/DeleteUser', {params: {id: item.id}})
+            .then((response)=>{
+                console.log(response)
+                this.users= response.data.users
+            })
+        },
+
+
         editUser(item) {
            this.EditUserData = item;
            this.IsEditMode = true;

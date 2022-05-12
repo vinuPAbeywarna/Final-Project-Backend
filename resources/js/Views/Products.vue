@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container productID="1">
         <v-row no-gutters>
             <v-card height="480" width="480">
 <!--                <v-img height="480" width="480" src="/assets/products/shorea-wall-art-nails-square.png"></v-img>-->
@@ -14,24 +14,22 @@
             <v-col>
                 <v-card-title>
                     <v-row no-gutters>
-                        Chair / Wooden Chair
+                       {{ product.name}}
                     </v-row>
                 </v-card-title>
 
                 <v-card-title class="mt-0 pt-0">
                     <v-row no-gutters >
-                        <v-chip class="ml-2" color="primary">5500 LKR</v-chip>
+                        <v-chip class="ml-2" color="primary">{{product.price}} LKR</v-chip>
                         <v-btn color="orange" icon><v-icon>mdi-heart</v-icon></v-btn>
-                        <v-btn color="orange" icon><v-icon>mdi-plus</v-icon></v-btn>
+
                     </v-row>
                 </v-card-title>
 
 
 
                 <v-card-text class="text-justify">
-                    42 pieces of quality hardwood, beautifully crafted together make this stunning honeycomb wall art & shelving unit a unique addition to any interior.
-
-                    Whether you choose to display those favourite travel photos, store your best make up sets or buy it as a gift for a friend, the honeycomb wall art will make your wall stand out above any other.
+                   {{product.description}}
                 </v-card-text>
 
                 <v-card-text>
@@ -112,7 +110,22 @@ export default {
 
 
         ],
+        product:[],
     }),
+    props:["productID"],
+    created(){
+        console.log(this.$route.params.id);
+        axios.get('/api/product/GetSingleProduct/'+ this.$route.params.id)
+            .then((response)=>{
+                    console.log(response)
+                    this.product = response.data;
+                }
+
+            );
+
+
+    },
+
     name: "Products"
 }
 </script>

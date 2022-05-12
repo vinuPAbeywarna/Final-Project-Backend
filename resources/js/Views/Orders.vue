@@ -1,141 +1,40 @@
 <template>
-    <v-row>
-        <v-col
-            cols="12"
-            xs="12"
-            sm="12"
-            md="12"
-            lg="12"
-            xl="12"
-        >
+    <v-container>
+        <v-toolbar-title class="font-weight-regular mt-5 ml-4">Order Details</v-toolbar-title>
+        <v-row no-gutters class="mb-4 mt-2">
+           <v-card width="1000">
+               <v-card-title>
+                   <v-text-field dense v-model="OrdersSearch" outlined label="Search..."></v-text-field>
+               </v-card-title>
+               <v-card-text>
+                   <v-data-table
+                       :headers="headers"
+                       :items="users"
+                       sort-by="calories"
+                       class="elevation-1"
+                       dense
+                   >
 
+                       <template v-slot:item.status="{ item }">
+                           <v-chip
 
+                               :color="getColor(item.status)"
+                               dark
+                               dense
+                               @click="updateOder(item.status,item.id)"
 
-            <v-toolbar-title class="font-weight-regular mt-5 ml-4">Order Details</v-toolbar-title>
+                           >
+                               {{ item.status }}
+                           </v-chip>
+                       </template>
 
+                   </v-data-table>
+               </v-card-text>
+           </v-card>
 
-            <v-row class="pa-4 pb-0">
-                <v-col
-                    cols="12"
-                    xs="5"
-                    sm="5"
-                    md="5"
-                    lg="5"
-                    xl="5"
-                >
-                    <v-text-field
-                        clearable
-                        dense
-                        label="Order ID "
-                        x-small
-                        outlined
-                        class="ml-9">
-                    </v-text-field>
-                </v-col>
+        </v-row>
+    </v-container>
 
-                <v-col
-                    cols="12"
-                    xs="2"
-                    sm="2"
-                    md="2"
-                    lg="2"
-                    xl="2"
-                >
-                    <v-btn class=" " dark color="light-blue darken-4"  solo dense  >
-                        <v-icon small dark left>mdi-check-decagram</v-icon> Search
-                    </v-btn>
-                </v-col>
-                <v-container>
-                    <v-data-table
-                        :headers="headers"
-                        :items="users"
-                        sort-by="calories"
-                        class="elevation-1"
-                        dense
-                    >
-                        <template v-slot:top>
-                            <v-toolbar
-                                flat
-                            >
-
-                                <v-spacer></v-spacer>
-                                <v-dialog
-                                    v-model="dialog"
-                                    max-width="500px"
-                                >
-
-                                    <v-card>
-                                        <v-card-title>
-
-                                        </v-card-title>
-
-                                        <v-card-text>
-                                            <v-container>
-                                                <v-row>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="editedItem.order_id"
-                                                            label="Name"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="editedItem.item_name"
-                                                            label="User Role"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="editedItem.status"
-                                                            label="Email"
-                                                        ></v-text-field>
-                                                    </v-col>
-                                                    <v-col
-                                                        cols="12"
-                                                        sm="6"
-                                                        md="4"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="editedItem.price"
-                                                            label="Contact Details"
-                                                        ></v-text-field>
-                                                    </v-col>
-
-                                                </v-row>
-                                            </v-container>
-                                        </v-card-text>
-
-
-                                    </v-card>
-                                </v-dialog>
-
-                            </v-toolbar>
-                        </template>
-
-
-                    </v-data-table>
-                </v-container>
-            </v-row>
-
-
-        </v-col>
-
-
-
-
-    </v-row>
 </template>
 
 <script>
@@ -152,11 +51,12 @@ export default {
                 value: 'order_id',
             },
             { text: 'Item Detail', value: 'item_name' },
-            { text: 'Status', value: 'status' },
             { text: 'Price', value: 'price' },
+            { text: 'Status', value: 'status' },
 
 
         ],
+        OrdersSearch:'',
         users: [],
         editedIndex: -1,
         editedItem: {
@@ -183,8 +83,13 @@ export default {
     },
 
     created () {
+        console.log("test oders")
         // this.initialize()
         this.getOrders();
+    },
+
+    mounted() {
+        this.updateOder();
     },
 
     methods: {
@@ -195,6 +100,27 @@ export default {
                 this.users = response.data.users
                 });
         },
+
+        async updateOder(status,id) {
+
+            if (status === 0){
+                authClient.put('api/orders/updateOrderStatus/'+id.toString())
+                    .then((response) => {
+                        console.log(response)
+                        this.users = response.data
+                    });
+            }
+
+
+        },
+
+        getColor (status) {
+            if (status === 0) return 'green'
+
+            else return 'orange'
+        },
+
+
         initialize () {
             // this.users = [
             //     {

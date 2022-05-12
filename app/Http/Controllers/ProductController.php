@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function SaveData(Request $request): JsonResponse
+    public function AddEditproduct(Request $request): JsonResponse
     {
         try {
 
-            product::create([
+            product::updateOrCreate(
+                ['id' => $request->get('id')],
+                [
                 'owner' => Auth::id(),
                 'name' => $request->get('name'),
                 'description' => $request->get('description'),
@@ -37,6 +39,34 @@ class ProductController extends Controller
             return response()->json(product::with('owner')->get());
         } catch (\Exception $e) {
             return response()->json($e->getMessage(), 200);
+        }
+    }
+    public function GetSingleProduct( $id): JsonResponse
+    { //$id =  $request->get('id');
+
+        try {
+            return response()->json(product::find($id));
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 200);
+        }
+    }
+
+    public function DeleteProduct(Request $request):JsonResponse
+    {
+        $id =  $request->get('id');
+       // return response()->json($id);
+        try{
+
+            $product= product::find($id);
+
+
+             $product->delete();
+
+//            return response()->json('The post successfully deleted');
+            return response()->json(product::with('owner')->get());
+
+        }catch (\Exception $e) {
+            return response()->json($e->getMessage(),500);
         }
     }
 

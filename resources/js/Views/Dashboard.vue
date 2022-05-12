@@ -15,7 +15,7 @@
                     <v-list-item-title class="text-h5 mb-1">
                         Total Sales
                     </v-list-item-title>
-                    <v-list-item-subtitle>200</v-list-item-subtitle>
+                    <v-list-item-subtitle></v-list-item-subtitle>
 
                 </v-list-item-content>
 
@@ -39,7 +39,7 @@
                     <v-list-item-title class="text-h5 mb-1">
                         Total Products
                     </v-list-item-title>
-                    <v-list-item-subtitle>200</v-list-item-subtitle>
+                    <v-list-item-subtitle >200</v-list-item-subtitle>
 
                 </v-list-item-content>
 
@@ -51,20 +51,22 @@
     <v-col >
         <v-toolbar-title class="ml-4 font-weight-bold " >Recent Orders</v-toolbar-title>
         <v-data-table
-            :headers="Order_headers"
+            :headers="headers"
             :items="orders"
             class="elevation-1 ml-4"
+            dense
 
         >
-            <template v-slot:header.name="{ header }">
-                {{ header.text.toUpperCase() }}
+            <template v-slot:header.name="{ items }">
+
             </template>
         </v-data-table>
     </v-col>
 
+
     <v-col cols="12" sm="6" class="align-content-sm-center ml-9 mt-7">
 
-            <graphs></graphs>
+           <graphs></graphs>
 
 
     </v-col>
@@ -73,88 +75,56 @@
 
 <script>
 import Graphs from "./graphs";
+import {authClient} from "../Plugins/client";
 export default {
     components: {Graphs},
+    dialog: false,
     data: () => ({
-        Order_headers: [
+        headers: [
             {
-                text: 'Order_ID',
+                text: 'Order ID',
                 align: 'start',
-                value: 'id',
+                sortable: false,
+                value: 'order_id',
             },
-            { text: 'Name', value: 'name' },
-            { text: 'Seller name', value: 'seller_name' },
-            { text: 'Buyer Name', value: 'buyer_name' },
+            { text: 'Item Detail', value: 'item_name' },
             { text: 'Price', value: 'price' },
-            { text: 'Quantity', value: 'quantity' },
-        ],
-        orders: [
-            {
-                id: 'Frozen Yogurt',
-                name: 159,
-                seller_name: 6.0,
-                buyer_name: 24,
-                price: 4.0,
-                quantity: '1%',
-            },
-            {
-                id: ' Yogurt',
-                name: 159,
-                seller_name: 6.0,
-                buyer_name: 24,
-                price: 4.0,
-                quantity: '1%',
-            },
-            {
-                id: 'Yogurt drink',
-                name: 159,
-                seller_name: 6.0,
-                buyer_name: 24,
-                price: 4.0,
-                quantity: '1%',
-            },
-
-
 
         ],
-        Products_headers: [
-            {
-                text: 'Product_ID',
-                align: 'start',
-                value: 'id',
-            },
-            { text: 'Name', value: 'name' },
-            { text: 'Seller name', value: 'seller_name' },
-            { text: 'Price', value: 'price' },
-            { text: 'Quantity', value: 'quantity' },
-        ],
-        products: [
-            {
-                id: 'F',
-                name: 159,
-                seller_name: 6.0,
-                price: 4.0,
-                quantity: '1%',
-            },
-            {
-                id: ' Yog',
-                name: 159,
-                seller_name: 6.0,
-                price: 4.0,
-                quantity: '1%',
-            },
-            {
-                id: 'urt',
-                name: 159,
-                seller_name: 6.0,
-                price: 4.0,
-                quantity: '1%',
-            },
-
-
-
-        ],
+        orders: [],
     }),
+
+    created () {
+        console.log("test created");
+
+
+    },
+    mounted() {
+       this.getOrdersHistory();
+       this.DisplayAllOrder();
+    },
+
+    methods :{
+
+        getOrdersHistory(){
+            authClient.get('api/dashboard/history')
+            .then((response)=>{
+                console.log(response)
+                this.orders=response.data.orders
+            })
+        },
+
+        DisplayAllOrder(){
+            authClient.get('api/dashboard/DisplayAllOrder')
+                .then((response)=>{
+                    console.log(response)
+                    this.orders=response.data.orders
+                })
+        }
+    },
+    initialize () {
+
+    },
 
     name: "Dashboard"
 }

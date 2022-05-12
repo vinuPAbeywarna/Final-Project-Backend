@@ -25,5 +25,6 @@ class Orders extends Model
     public function seller():HasOne
     {
         return $this->hasOne(User_Sellers::class,'id','seller_id');
+
     }
 }

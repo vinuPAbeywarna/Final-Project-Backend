@@ -1,85 +1,73 @@
 <template>
-    <v-container
-        class="mt-4"
-        fluid
-        style="min-height: 434px"
-    >
-        <v-fade-transition mode="out-in">
-            <v-row>
 
 
-                <v-col cols="6">
-                    <v-card class="mt-7 " to="/leather-item-shop">
+
+
+        <v-container fluid>
+            <h3>Categories</h3>
+            <v-row dense>
+                <v-col
+                    v-for="card in category"
+                    :key="card.Category_name "
+                    :cols="card.flex"
+                    cols="12" sm="3"
+                >
+                    <v-card>
                         <v-img
-                            src="https://picsum.photos/350/165?random"
-                            max-height="125"
-                            class="grey darken-4"
-                        ></v-img>
-                        <v-card-title class="text-h6">
-                            Leather Items
-                        </v-card-title>
-                    </v-card>
-                </v-col>
+                            :src="card.image"
+                            class="white--text align-end"
+                            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                            height="200px"
+                        >
+                            <v-card-title v-text="card.Category_name"></v-card-title>
 
-<!--                <v-col cols="6">-->
-<!--                    <v-card>-->
-<!--                        <v-img-->
-<!--                            src="https://picsum.photos/350/165?random"-->
-<!--                            max-height="125"-->
-<!--                            class="grey darken-4"-->
-<!--                        ></v-img>-->
-<!--                        <v-card-title class="text-h6">-->
-<!--                            Art and craft material Shop-->
-<!--                        </v-card-title>-->
-<!--                    </v-card>-->
-<!--                </v-col>-->
 
-                <v-col cols="6">
-                    <v-card class="mt-7" to="/art-and-craft-shop">
-                        <v-img
-                            src="https://picsum.photos/350/165?random"
-                            max-height="125"
-                            class="grey darken-4"
-                        ></v-img>
-                        <v-card-title class="text-h6">
-                            Art and Crafts
-                        </v-card-title>
+
+                        </v-img>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+
+
+                            <v-btn icon>
+                                <v-icon>mdi-share-variant</v-icon>
+                            </v-btn>
+<!--                            <v-btn dense to="/products/{{ card.id}}">-->
+<!--                                View Item-->
+<!--                            </v-btn>-->
+                            <router-link :to="`/products/${card.id}`">
+                                <v-btn class="justify-center" color="blue white--text mt-5 mr-8">
+                                   View Item
+                                </v-btn>
+                            </router-link>
+
+                        </v-card-actions>
                     </v-card>
                 </v-col>
             </v-row>
-        </v-fade-transition>
-    </v-container>
-<!--    <v-container>-->
-<!--        <span class="text-h4">Shops</span>-->
-<!--        <v-row no-gutters justify="space-between">-->
-<!--            <v-card-->
-<!--                v-for="i in 3"-->
-<!--                :key="i"-->
-<!--                hover-->
-<!--                ripple-->
-<!--                class="ma-2 rounded-lg"-->
-<!--                width="48%"-->
-<!--                to="/leather-item-shop"-->
-<!--                max-width="48%">-->
-<!--                <v-img-->
-<!--                    class="white&#45;&#45;text align-end"-->
-<!--                    height="160px"-->
+        </v-container>
 
-<!--                    :src="'https://picsum.photos/400/20'+i"-->
-<!--                >-->
-<!--                    <v-card-title style="background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(4,4,4,1) 100%);">-->
-<!--                        <v-icon class="mr-1" color="white">mdi-store</v-icon>Leather Item Shop-->
-<!--                    </v-card-title>-->
-<!--                </v-img>-->
-
-
-<!--            </v-card>-->
-<!--        </v-row>-->
-<!--    </v-container>-->
 </template>
 
 <script>
+import {authClient} from "../Plugins/client";
+
 export default {
+    data: () => ({
+        category:[]
+    }),
+    mounted() {
+        this.getCategory()
+    },
+    methods:{
+        getCategory() {
+            authClient.get('api/category/GetCategories')
+                .then((response) => {
+                    console.log(response)
+                    this.category = response.data
+                });
+        }
+    },
     name: "Shops"
 }
 </script>

@@ -23,7 +23,11 @@ return new class extends Migration
             $table->string('buyer_name');
             $table->double('price');
             $table->string('quantity');
-            $table->string('status');
+            $table->boolean('status')->default('true');
+            $table->string('address');
+            $table->string('postal_code');
+            $table->string('contact_no');
+            $table->string('order_note');
             $table->timestamps();
         });
     }

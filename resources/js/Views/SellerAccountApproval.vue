@@ -10,10 +10,10 @@
                         <v-img  v-if="$store.state.User.role === 'admin'" src="/images/businessman-character-avatar-isolated_24877-60111.webp"/>
 
                     </v-avatar>
-                    <v-col class="mr-6">
-                        <span>Account Type : Seller </span><br/>
+                    <v-col class="mr-6" >
+                        <span>Account Type : Seller</span><br/>
                         <span>Name : Vihanga Nirmani</span><br/>
-                        <span>City : Colombo</span>
+
 
                     </v-col>
 
@@ -37,7 +37,7 @@
                     <v-col class="mr-6">
                         <span>Account Type : Seller </span><br/>
                         <span>Name : Sachintha Siriwardana</span><br/>
-                        <span>City : Colombo</span>
+
 
                     </v-col>
 
@@ -59,7 +59,7 @@
                     <v-col class="mr-6">
                         <span>Account Type : Seller </span><br/>
                         <span>Name : Kamal Siriwardana</span><br/>
-                        <span>City : Colombo</span>
+
 
                     </v-col>
                     <v-col>
@@ -75,6 +75,12 @@
 
 <script>
 export default {
+    data: () => ({
+        user: null
+    }),
+    mounted() {
+        this.user = this.$store.state.User;
+    },
     name: "SellerAccountApprovel"
 }
 </script>

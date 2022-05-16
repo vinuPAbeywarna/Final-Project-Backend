@@ -20,5 +20,6 @@
     "/js/ArtAndCraftKitsShop.js": "/js/ArtAndCraftKitsShop.js",
     "/js/ArtAndCraftShop.js": "/js/ArtAndCraftShop.js",
     "/js/AddNewUserDetails.js": "/js/AddNewUserDetails.js",
+    "/js/PayPalCheckout.js": "/js/PayPalCheckout.js",
     "/css/app.css": "/css/app.css"
 }

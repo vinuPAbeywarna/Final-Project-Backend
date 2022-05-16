@@ -1,7 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {authClient} from "./client";
+import { authClient } from "./client";
 import router from "./router";
+import cart from '../modules/cart';
+import wishlist from '../modules/wishlist';
+import seller from '../modules/seller';
+import checkout from '../modules/checkout';
+import sale from '../modules/sale';
 
 Vue.use(Vuex);
 
@@ -9,7 +14,7 @@ const Store = new Vuex.Store({
     state: {
         Token: null,
         User: null,
-        Loading:false,
+        Loading: false,
     },
     mutations: {
         auth(state, data) {
@@ -17,7 +22,7 @@ const Store = new Vuex.Store({
             state.User = data.user;
             window.localStorage.setItem('token', data.token);
             window.localStorage.setItem('user', JSON.stringify(data.user));
-            authClient.defaults.headers.authorization = 'Bearer '+ data.token;
+            authClient.defaults.headers.authorization = 'Bearer ' + data.token;
             router.push('/user-profile').then(r => {
                 window.location.reload();
             });
@@ -33,16 +38,16 @@ const Store = new Vuex.Store({
         },
         authCheck(state) {
             let token = localStorage.getItem('token');
-            authClient.defaults.headers.authorization = 'Bearer '+ token;
+            authClient.defaults.headers.authorization = 'Bearer ' + token;
             authClient.post('/api/auth/check').then(response => {
                 if (response.data.status === 'success') {
                     state.Token = token;
                     state.User = response.data.user;
                     window.localStorage.setItem('token', token);
                     window.localStorage.setItem('user', JSON.stringify(response.data.user));
-                    authClient.defaults.headers.authorization = 'Bearer '+ token;
+                    authClient.defaults.headers.authorization = 'Bearer ' + token;
                     //router.push('/').then(r => {
-                        //window.location.reload();
+                    //window.location.reload();
                     //});
                 } else {
                     window.localStorage.clear();
@@ -64,6 +69,13 @@ const Store = new Vuex.Store({
 
             });
         },
+    },
+    modules: {
+        cart,
+        wishlist,
+        seller,
+        checkout,
+        sale
     }
 });
 

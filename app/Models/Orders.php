@@ -9,22 +9,23 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Orders extends Model
 {
     use HasFactory;
-    protected $fillable =[
-        'order_id',
-        'item_name',
-        'seller_name',
-        'user_id',
-        'buyer_name',
-        'price',
-        'quantity',
-        'status'
 
-    ];
+    protected $guarded = [];
 
+    // Order status
+    const PENDING = 0;
+    const APPROVED = 1;
+
+    // Payment methods
+    const ONLINE = 1;
+    const BANK_TRANSFER = 2;
+
+    // Payment status
+    const PAID = 1;
+    const UNPAID = 0;
 
     public function seller():HasOne
     {
         return $this->hasOne(User_Sellers::class,'id','seller_id');
-
     }
 }

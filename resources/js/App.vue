@@ -151,7 +151,7 @@
 
           </v-list>
       </v-navigation-drawer>
-
+      <notifications />
       <v-main>
           <router-view/>
       </v-main>

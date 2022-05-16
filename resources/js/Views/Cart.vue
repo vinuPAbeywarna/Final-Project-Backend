@@ -2,18 +2,22 @@
     <v-container>
         <v-card>
             <v-data-table
-                :items="CartItems"
+                :items="cartItems"
                 :headers="headers"
             >
-                <template v-slot:item.Remove="{ item }">
-                    <v-btn icon><v-icon>mdi-trash-can</v-icon></v-btn>
+                <template v-slot:item.action="{ item }" v-if="$store.state.User.role === 'admin'">
+                    <v-icon
+                        small
+                        class="mr-2"
+                        @click="removeItem(item)"
+                        v-if="$store.state.User.role === 'admin'">mdi-delete</v-icon>
                 </template>
             </v-data-table>
 
             <v-card-title>
                 <v-row no-gutters align="center">
 
-                    Total: 5500 LKR
+                    Total: {{ total }} LKR
                     <v-spacer/>
                     <v-btn class="ml-2" color="primary" to="/checkout-page">Proceed to Checkout</v-btn>
                 </v-row>
@@ -26,24 +30,35 @@
 <script>
 export default {
     name: "Cart",
-    data: ()=>({
-        CartItems: [
-            {
-                Name:'Honeycomb Wall Art / Photo Frame / Shelving',
-                Price: '5500 LKR',
-                Quantity: '1',
-                Total: '5500 LKR'
-            }
-        ],
-        headers: [
-            { text:'Product', value:'Name'},
-            { text:'Price', value:'Price'},
-            { text:'Quantity', value:'Quantity'},
-            { text:'Total', value:'Total'},
-            { text:'Remove', value:'Remove'}
-        ]
-    })
-
+    data() {
+        return {
+            headers: [
+                { text:'Product', value:'name'},
+                { text:'Price', value:'price'},
+                { text:'Quantity', value:'quantity'},
+                { text:'Action', value:'action'}
+            ]
+        }
+    },
+    mounted() {
+        this.getCartItems()
+    },
+    methods: {
+        getCartItems() {
+            this.$store.dispatch('cart/getAllItems')
+        },
+        removeItem(item) {
+            this.$store.dispatch('cart/removeItems', item)
+        }
+    },
+    computed: {
+        total() {
+            return this.$store.state.cart.items.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0)
+        },
+        cartItems() {
+            return this.$store.state.cart.items
+        }
+    }
 }
 </script>
 

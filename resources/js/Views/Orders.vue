@@ -9,7 +9,7 @@
                <v-card-text>
                    <v-data-table
                        :headers="headers"
-                       :items="users"
+                       :items="orders"
                        sort-by="calories"
                        class="elevation-1"
                        dense
@@ -24,10 +24,20 @@
                                @click="updateOder(item.status,item.id)"
 
                            >
-                               {{ item.status }}
+                               {{ getStatus(item.status) }}
                            </v-chip>
                        </template>
+                       <template v-slot:item.is_paid="{ item }">
+                           <v-chip
 
+                               :color="getColor(item.is_paid)"
+                               dark
+                               dense
+
+                           >
+                               {{ getPaymentStatus(item.is_paid) }}
+                           </v-chip>
+                       </template>
                    </v-data-table>
                </v-card-text>
            </v-card>
@@ -41,6 +51,7 @@
 import {authClient} from "../Plugins/client";
 
 export default {
+    name: "Orders",
     data: () => ({
         dialog: false,
         headers: [
@@ -48,16 +59,16 @@ export default {
                 text: 'Order ID',
                 align: 'start',
                 sortable: false,
-                value: 'order_id',
+                value: 'id',
             },
-            { text: 'Item Detail', value: 'item_name' },
-            { text: 'Price', value: 'price' },
+            { text: 'Full Name', value: 'full_name' },
+            { text: 'Mobile No', value: 'contact_no' },
+            { text: 'Total(LKR)', value: 'total' },
+            { text: 'Payment Status', value: 'is_paid' },
             { text: 'Status', value: 'status' },
-
-
         ],
         OrdersSearch:'',
-        users: [],
+        orders: [],
         editedIndex: -1,
         editedItem: {
             order_id: '',
@@ -73,83 +84,35 @@ export default {
             price: '',
         },
     }),
-
-    computed: {
-
-    },
-
-    watch: {
-
-    },
-
-    created () {
-        console.log("test oders")
-        // this.initialize()
+    mounted() {
         this.getOrders();
     },
-
-    mounted() {
-        this.updateOder();
-    },
-
     methods: {
         getOrders(){
             authClient.post('api/orders/getOrders')
             .then((response) => {
-                console.log(response)
-                this.users = response.data.users
-                });
+                this.orders = response.data
+            });
         },
-
-        async updateOder(status,id) {
-
+        updateOder(status,id) {
             if (status === 0){
                 authClient.put('api/orders/updateOrderStatus/'+id.toString())
                     .then((response) => {
                         console.log(response)
-                        this.users = response.data
+                        this.orders = response.data
                     });
             }
-
-
         },
-
         getColor (status) {
-            if (status === 0) return 'green'
-
-            else return 'orange'
+            return status === 0 ? 'orange' : 'green'
         },
-
-
-        initialize () {
-            // this.users = [
-            //     {
-            //         order_id: '#001',
-            //         item_detail: 'handloom Materials',
-            //         status: 'Shipped',
-            //         price: 'Rs.1000',
-            //
-            //     },
-            //     {
-            //         order_id: '#002',
-            //         item_detail: 'Portrait art',
-            //         status: 'Pending',
-            //         price: 'Rs.5000',
-            //     },
-            //     {
-            //         order_id: '#003',
-            //         item_detail: 'Wooden chair',
-            //         status: 'Confirm',
-            //         price: 'Rs.15000',
-            //     },
-            //
-            //
-            // ]
+        getStatus(status) {
+            return status === 0 ? 'Pending' : 'Approved'
         },
-
-
+        getPaymentStatus(status) {
+            return status === 0 ? 'Unpaid' : 'Paid'
+        }
     },
-    name: "Orders"
 }
 </script>
 

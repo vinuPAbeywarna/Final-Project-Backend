@@ -21,14 +21,13 @@ return new class extends Migration
             $table->string('contact_no');
             $table->string('city');
             $table->string('address');
-//          $table->string('postal_code');
+            //          $table->string('postal_code');
             $table->string('birthday');
             $table->string('gender');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-
-            $table->enum('role',['admin','seller','buyer']);
-
+            $table->enum('role', ['admin', 'seller', 'buyer']);
+            $table->integer('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -12,7 +12,7 @@
             <v-card-text>
                 <v-data-table :headers="headers" :items="products" :search="productSearch" sort-by="calories">
 
-                    <template v-slot:item.actions="{ item }" v-if="$store.state.User.role === 'admin'">
+                    <template v-slot:item.actions="{ item }" v-if="$store.state.User.role === 'admin' " >
                         <v-icon small class="mr-2" @click="editproduct(item)" v-if="$store.state.User.role === 'admin'">
                             mdi-pencil
                         </v-icon>

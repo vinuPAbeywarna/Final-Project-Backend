@@ -2753,8 +2753,7 @@ var cart = {
   namespaced: true,
   state: function state() {
     return {
-      items: [],
-      total: 0
+      items: []
     };
   },
   mutations: {
@@ -2767,11 +2766,6 @@ var cart = {
           quantity: item.qty
         };
       });
-    },
-    setTotal: function setTotal(state) {
-      state.total = state.items.reduce(function (previousValue, currentValue) {
-        return previousValue + currentValue.price;
-      }, 0);
     }
   },
   actions: {

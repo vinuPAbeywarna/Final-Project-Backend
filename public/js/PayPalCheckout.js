@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       paypal: {
-        sandbox: "AcTwfOOeId9TDMa_ZhFOVcYRhSpnoySee8hOuV5JE4v2IS5GG_CNzl5gcxfsD4UaPVhKG6vWpQrK3se2"
+        sandbox: "AVlmssJ8mal9ilnzAUa0z3Pt00gTjTa8l5iuHgkIgWdTtB7uLQ3SzIGctpY--lpxDtBHhYiKE49VpqzH"
       },
       buttonStyle: {
         label: 'checkout',

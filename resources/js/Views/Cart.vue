@@ -52,8 +52,12 @@ export default {
         }
     },
     computed: {
-        total() {
-            return this.$store.state.cart.items.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0)
+        total: function () {
+            let sum = 0;
+            this.$store.state.cart.items.forEach(function (item) {
+                sum += (parseFloat(item.price) * parseFloat(item.quantity));
+            });
+            return sum;
         },
         cartItems() {
             return this.$store.state.cart.items

@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
 
         Category::insert([
             'Category_name' => 'T-Shirts',
-            'image' => 'https://picsum.photos/200/300'
+            'image' => '/Images/default/categories/1.jpeg'
         ]);
 
         Product::create([
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             'name' => "XINYI Men's T-shirt 100% cotton",
             'price' => 100,
             'description' => 'Something',
-            'image' => 'https://picsum.photos/200/300',
+            'image' => 'Images/default/products/1.jpeg',
             'approved' => 1,
             'category_id' => 1
         ]);
@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
             'name' => "TEEHUB Promotion Cookie Men T-Shirt",
             'price' => 200,
             'description' => 'Something',
-            'image' => 'https://picsum.photos/200/300',
+            'image' => 'Images/default/products/2.jpeg',
             'approved' => 1,
             'category_id' => 1
         ]);

@@ -88,67 +88,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CheckoutPage",
@@ -187,7 +126,11 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.cart.items;
     },
     totalAmount: function totalAmount() {
-      return this.$store.state.cart.total;
+      var total = 0;
+      this.$store.state.cart.items.forEach(function (item) {
+        total += parseFloat(item.price) * parseFloat(item.quantity);
+      });
+      return total;
     }
   },
   mounted: function mounted() {
@@ -801,19 +744,19 @@ var render = function () {
                               _c("tr", [
                                 _c("th", { staticClass: "text-left" }, [
                                   _vm._v(
-                                    "\n                            Item\n                        "
+                                    "\n                                    Item\n                                "
                                   ),
                                 ]),
                                 _vm._v(" "),
                                 _c("th", { staticClass: "text-left" }, [
                                   _vm._v(
-                                    "\n                            Qty\n                        "
+                                    "\n                                    Qty\n                                "
                                   ),
                                 ]),
                                 _vm._v(" "),
                                 _c("th", { staticClass: "text-left" }, [
                                   _vm._v(
-                                    "\n                            Price\n                        "
+                                    "\n                                    Price\n                                "
                                   ),
                                 ]),
                               ]),

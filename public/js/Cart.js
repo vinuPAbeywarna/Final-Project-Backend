@@ -72,9 +72,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     total: function total() {
-      return this.$store.state.cart.items.reduce(function (previousValue, currentValue) {
-        return previousValue + currentValue.price;
-      }, 0);
+      var sum = 0;
+      this.$store.state.cart.items.forEach(function (item) {
+        sum += parseFloat(item.price) * parseFloat(item.quantity);
+      });
+      return sum;
     },
     cartItems: function cartItems() {
       return this.$store.state.cart.items;

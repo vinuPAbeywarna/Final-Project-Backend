@@ -11,6 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _Plugins_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Plugins/client */ "./resources/js/Plugins/client.js");
 //
 //
 //
@@ -73,104 +74,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -178,6 +82,15 @@ __webpack_require__.r(__webpack_exports__);
       radio: null,
       radi: null
     };
+  },
+  methods: {
+    deleteAccount: function deleteAccount() {
+      var _this = this;
+
+      _Plugins_client__WEBPACK_IMPORTED_MODULE_0__.authClient["delete"]('/api/user-details/DeleteUser').then(function () {
+        _this.$router.push('/auth');
+      });
+    }
   },
   name: "Settings"
 });
@@ -454,183 +367,6 @@ var render = function () {
     [
       _c(
         "v-col",
-        { attrs: { cols: "6" } },
-        [
-          _c("v-toolbar-title", { staticClass: "font-weight-bold mt-5 ml-4" }, [
-            _vm._v("Settings"),
-          ]),
-          _vm._v(" "),
-          _c(
-            "v-card",
-            { staticClass: " mt-4 ml-5", attrs: { "max-width": "550" } },
-            [
-              _c("v-card-text", [
-                _c("p", { staticClass: "text-h6 text--primary " }, [
-                  _vm._v(
-                    "\r\n                    Notification\r\n                "
-                  ),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text--primary font-weight-regular" },
-                  [
-                    _c(
-                      "v-container",
-                      { attrs: { fluid: "" } },
-                      [
-                        _c(
-                          "v-radio-group",
-                          {
-                            attrs: { mandatory: "" },
-                            model: {
-                              value: _vm.radios,
-                              callback: function ($$v) {
-                                _vm.radios = $$v
-                              },
-                              expression: "radios",
-                            },
-                          },
-                          [
-                            _c("v-radio", {
-                              attrs: {
-                                label: "Allow Desktop Notification",
-                                value: "radio-1",
-                              },
-                            }),
-                            _vm._v(" "),
-                            _c("v-radio", {
-                              attrs: {
-                                label: "Enable Notifications",
-                                value: "radio-2",
-                              },
-                            }),
-                            _vm._v(" "),
-                            _c("v-radio", {
-                              attrs: {
-                                label: "Get notification for my own activity",
-                                value: "radio-3",
-                              },
-                            }),
-                            _vm._v(" "),
-                            _c("v-radio", {
-                              attrs: { label: "DND", value: "radio-4" },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ],
-                  1
-                ),
-              ]),
-            ],
-            1
-          ),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-col",
-        { attrs: { cols: "6" } },
-        [
-          _c(
-            "v-card",
-            { staticClass: " mt-16", attrs: { "max-width": "550" } },
-            [
-              _c("v-card-text", [
-                _c("p", { staticClass: "text-h6 text--primary " }, [
-                  _vm._v(
-                    "\r\n                    Deactivate Account\r\n                "
-                  ),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text--primary font-weight-regular" },
-                  [
-                    _c(
-                      "v-container",
-                      { attrs: { fluid: "" } },
-                      [
-                        _c(
-                          "v-radio-group",
-                          {
-                            attrs: { mandatory: "" },
-                            model: {
-                              value: _vm.radio,
-                              callback: function ($$v) {
-                                _vm.radio = $$v
-                              },
-                              expression: "radio",
-                            },
-                          },
-                          [
-                            _c("v-radio", {
-                              attrs: {
-                                label: "I have a privacy concern",
-                                value: "radio-1",
-                              },
-                            }),
-                            _vm._v(" "),
-                            _c("v-radio", {
-                              attrs: {
-                                label: "This is temporary",
-                                value: "radio-2",
-                              },
-                            }),
-                            _vm._v(" "),
-                            _c("v-radio", {
-                              attrs: { label: "other", value: "radio-3" },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ],
-                  1
-                ),
-              ]),
-              _vm._v(" "),
-              _c("v-card-actions", [
-                _c(
-                  "div",
-                  { staticClass: "mt-0 mr-6" },
-                  [
-                    _c(
-                      "v-btn",
-                      {
-                        attrs: {
-                          text: "",
-                          color: "primary",
-                          dark: "",
-                          dense: "",
-                        },
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                        Deactivate Account\r\n                    "
-                        ),
-                      ]
-                    ),
-                  ],
-                  1
-                ),
-              ]),
-            ],
-            1
-          ),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-col",
         [
           _c(
             "v-card",
@@ -706,6 +442,7 @@ var render = function () {
                           dark: "",
                           dense: "",
                         },
+                        on: { click: _vm.deleteAccount },
                       },
                       [
                         _vm._v(
@@ -947,7 +684,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuetify/lib/components/VRadioGroup */ "./node_modules/vuetify/lib/components/VRadioGroup/VRadio.js");
 /* harmony import */ var vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuetify/lib/components/VRadioGroup */ "./node_modules/vuetify/lib/components/VRadioGroup/VRadioGroup.js");
 /* harmony import */ var vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuetify/lib/components/VGrid */ "./node_modules/vuetify/lib/components/VGrid/VRow.js");
-/* harmony import */ var vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuetify/lib/components/VToolbar */ "./node_modules/vuetify/lib/components/VToolbar/index.js");
 
 
 
@@ -977,8 +713,7 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 
 
-
-_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["default"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["default"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__.VCardActions,VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__.VCardText,VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["default"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["default"],VRadio: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_9__["default"],VRadioGroup: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_10__["default"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_11__["default"],VToolbarTitle: vuetify_lib_components_VToolbar__WEBPACK_IMPORTED_MODULE_12__.VToolbarTitle})
+_node_modules_vuetify_loader_lib_runtime_installComponents_js__WEBPACK_IMPORTED_MODULE_3___default()(component, {VBtn: vuetify_lib_components_VBtn__WEBPACK_IMPORTED_MODULE_4__["default"],VCard: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_5__["default"],VCardActions: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__.VCardActions,VCardText: vuetify_lib_components_VCard__WEBPACK_IMPORTED_MODULE_6__.VCardText,VCol: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_7__["default"],VContainer: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_8__["default"],VRadio: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_9__["default"],VRadioGroup: vuetify_lib_components_VRadioGroup__WEBPACK_IMPORTED_MODULE_10__["default"],VRow: vuetify_lib_components_VGrid__WEBPACK_IMPORTED_MODULE_11__["default"]})
 
 
 /* hot reload */
@@ -2574,40 +2309,6 @@ const baseMixins = (0,_util_mixins__WEBPACK_IMPORTED_MODULE_2__["default"])(_VIt
 
 }));
 //# sourceMappingURL=VRadioGroup.js.map
-
-/***/ }),
-
-/***/ "./node_modules/vuetify/lib/components/VToolbar/index.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/vuetify/lib/components/VToolbar/index.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "VToolbar": () => (/* reexport safe */ _VToolbar__WEBPACK_IMPORTED_MODULE_1__["default"]),
-/* harmony export */   "VToolbarItems": () => (/* binding */ VToolbarItems),
-/* harmony export */   "VToolbarTitle": () => (/* binding */ VToolbarTitle),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _VToolbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VToolbar */ "./node_modules/vuetify/lib/components/VToolbar/VToolbar.js");
-/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../util/helpers */ "./node_modules/vuetify/lib/util/helpers.js");
-// Components
- // Utilities
-
-
-const VToolbarTitle = (0,_util_helpers__WEBPACK_IMPORTED_MODULE_0__.createSimpleFunctional)('v-toolbar__title');
-const VToolbarItems = (0,_util_helpers__WEBPACK_IMPORTED_MODULE_0__.createSimpleFunctional)('v-toolbar__items');
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  $_vuetify_subcomponents: {
-    VToolbar: _VToolbar__WEBPACK_IMPORTED_MODULE_1__["default"],
-    VToolbarItems,
-    VToolbarTitle
-  }
-});
-//# sourceMappingURL=index.js.map
 
 /***/ }),
 

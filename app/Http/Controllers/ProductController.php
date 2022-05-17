@@ -25,23 +25,27 @@ class ProductController extends Controller
         try {
 
             if ($request->hasFile('image')) {
+                $name = time() . '.' . $request->file('image')->getClientOriginalExtension();
+                $request->file('image')->move(public_path('products'), $name);
+                $path = 'products/' . $name;
                 $edited_product = Product::updateOrCreate(
                     ['id' => $request->get('id')],
                     [
-                        'image' => $request->file('image')->storeAs('products', time() . '.' . $request->file('image')->getClientOriginalExtension(), 'public'),
+                        'image' => $path,
                         'owner' => Auth::id(),
-                        'category_id' => 1,
+                        'category_id' => $request->category,
                         'name' => $request->get('name'),
                         'description' => $request->get('description'),
                         'price' => $request->get('price'),
                     ]
                 );
+
             } else {
                 $edited_product = Product::updateOrCreate(
                     ['id' => $request->get('id')],
                     [
                         'owner' => Auth::id(),
-                        'category_id' => 1,
+                        'category_id' => $request->category,
                         'name' => $request->get('name'),
                         'description' => $request->get('description'),
                         'price' => $request->get('price'),
@@ -59,7 +63,7 @@ class ProductController extends Controller
     public function GetProduct(): JsonResponse
     {
         try {
-            return response()->json(Product::with('owner')->get());
+            return response()->json(Product::with(['owner', 'category'])->get());
         } catch (\Exception $e) {
             return response()->json($e->getMessage(), 200);
         }

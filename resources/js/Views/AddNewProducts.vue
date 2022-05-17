@@ -7,13 +7,13 @@
                 <v-card max-width="655" align="justify" class="ml-4">
                     <v-card-text>
                         <v-text-field v-model="product.name" outlined label="Name" dense></v-text-field>
-<!--                        <v-select-->
-<!--                            :items="categories"-->
-<!--                            label="Select a category"-->
-<!--                            dense-->
-<!--                            outlined-->
-<!--                            v-model="product.category"-->
-<!--                        ></v-select>-->
+                        <v-select
+                            :items="categories"
+                            label="Select a category"
+                            dense
+                            outlined
+                            v-model="product.category"
+                        ></v-select>
                         <v-textarea v-model="product.description" outlined label="Description" dense></v-textarea>
                         <v-btn raised class="primary mb-5" @click="onPickFile">Updoad Image
                         </v-btn>
@@ -74,6 +74,7 @@ export default {
             formData.append('name', this.product.name)
             formData.append('price', this.product.price)
             formData.append('description', this.product.description)
+            formData.append('category', this.product.category.value === undefined ? this.product.category : this.product.category.value)
             //formData.append('category', this.product.category)
             formData.append('image', file)
             authClient.post('/api/add-new-products/AddEditproduct', formData).then((response) => {
@@ -102,7 +103,10 @@ export default {
         },
         getAllCategories() {
             authClient.get('/api/category/GetCategories').then((res) => {
-                this.categories = res.data.map(i => i['Category_name'])
+                this.categories = res.data.map(i => ({
+                    text: i['Category_name'],
+                    value: i['id']
+                }))
             }).catch(err => {
                 console.log(err);
             });
@@ -113,6 +117,10 @@ export default {
         this.getAllCategories()
         if (this.edit) {
             this.product = this.product_data;
+        }
+        this.product.category = {
+            text: this.product_data.category.Category_name,
+            value: this.product_data.category.id
         }
     },
 

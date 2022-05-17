@@ -3,8 +3,7 @@ import {authClient} from "../Plugins/client";
 const cart = {
     namespaced: true,
     state: () => ({
-        items: [],
-        total: 0
+        items: []
     }),
     mutations: {
         setItems(state, items) {
@@ -15,9 +14,6 @@ const cart = {
                 quantity: item.qty,
             }))
         },
-        setTotal(state) {
-            state.total = state.items.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0)
-        }
     },
     actions: {
         getAllItems({ commit }) {

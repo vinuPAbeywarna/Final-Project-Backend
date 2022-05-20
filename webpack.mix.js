@@ -3,11 +3,6 @@ require('vuetifyjs-mix-extension')
 require('laravel-mix-bundle-analyzer');
 require('vuetify-loader');
 
-
-if (mix.inProduction()) {
-    mix.bundleAnalyzer();
-}
-
 mix.options({
     hmrOptions: {
         host: 'public.local',

@@ -46,6 +46,7 @@
                             </v-form>
 
                             <v-form v-if="!is_login" ref="form" v-model="valid" lazy-validation>
+
                                 <v-text-field
                                     outlined
                                     v-model="form.name"
@@ -80,6 +81,64 @@
                                     type="password"
                                     required
                                 ></v-text-field>
+                                <v-text-field
+                                    outlined
+                                    v-model="form.nic"
+                                    :rules="nicRules"
+                                    label="NIC"
+                                    type="nic"
+                                    required
+                                ></v-text-field>
+
+
+
+                                <v-text-field
+                                    outlined
+                                    v-model="form.contact_no"
+                                    :rules="contact_noRules"
+                                    label="Contact Number"
+                                    type="contact_no"
+                                    required
+                                ></v-text-field>
+
+                                <v-text-field
+                                    outlined
+                                    v-model="form.city"
+                                    :rules="cityRules"
+                                    label="City"
+                                    type="city"
+                                    required
+                                ></v-text-field>
+
+                                <v-text-field
+                                    outlined
+                                    v-model="form.address"
+                                    :rules="addressRules"
+                                    label="Address"
+                                    type="address"
+                                    required
+                                ></v-text-field>
+
+                                <v-text-field
+                                    outlined
+                                    v-model="form.birthday"
+                                    :rules="birthdayRules"
+                                    label="Birth Day"
+                                    type="birthday"
+                                    required
+                                ></v-text-field>
+
+                                <v-select
+                                    outlined
+                                    :items="GenderTypes"
+                                    item-text="titles"
+                                    item-value="values"
+                                    v-model="form.gender"
+                                    :rules="genderRules"
+                                    label="Gender"
+                                    required
+                                ></v-select>
+
                                 <v-select
                                     outlined
                                     :items="AccountTypes"
@@ -102,6 +161,7 @@
                                     @click="is_login = true">
                                     Sign In
                                 </v-btn>
+
                             </v-form>
                         </v-col>
                     </v-row>
@@ -129,6 +189,12 @@ export default {
             email: null,
             password: '',
             password_confirmation: '',
+            nic:null,
+            contact_no:null,
+            city:null,
+            address:null,
+            birthday:null,
+            gender:null,
             role: null
         },
         valid: false,
@@ -141,6 +207,18 @@ export default {
                 title:"Buyer",
                 value:"buyer"
             }
+        ],
+        GenderTypes:[
+            {
+                titles:"Male",
+                values:'male'
+
+            },
+            {
+                titles: "Female",
+                values: "female"
+            }
+
         ],
         nameRules: [
             v => !!v || 'Name is required',
@@ -155,7 +233,27 @@ export default {
         passwordRules: [
             v => !!v || 'Password is required',
             v => v.length >= 6 || 'Password must be at least 6 characters'
-        ]
+        ],
+        nicRules: [
+            v => !!v || 'NIC is required',
+        ],
+        contact_noRules: [
+            v => !!v || 'Contact Number is required',
+        ],
+        cityRules: [
+            v => !!v || 'City is required',
+        ],
+        birthdayRules: [
+            v => !!v || 'BirthDay is required',
+        ],
+        GenderRules: [
+            v => !!v || 'Gender is required',
+        ],
+        addressRules: [
+            v => !!v || 'Address is required',
+        ],
+
+
     }),
     methods:{
         Login(){

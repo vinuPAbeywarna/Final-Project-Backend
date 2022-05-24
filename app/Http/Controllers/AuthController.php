@@ -21,9 +21,7 @@ class AuthController extends Controller
                 'password' => 'required|alpha_num|between:4,8|confirmed',//'required|confirmed',
                 'nic' =>'required',
                 'contact_no' =>'required',
-                'city' =>'required',
                 'birthday' =>'required',
-                'gender' =>'required',
                 'address' =>'required',
                 'role' => 'required|string|in:buyer,seller'
             ]);
@@ -35,10 +33,8 @@ class AuthController extends Controller
                 'password' => Hash::make($request->get('password')),
                 'nic' => $request->get('nic'),
                 'contact_no'=>$request->get('contact_no'),
-                'city'=>$request->get('city'),
                 'address'=>$request->get('address'),
                 'birthday'=>$request->get('birthday'),
-                'gender'=>$request->get('gender'),
                 'role' => $request->get('role')
             ]);
 

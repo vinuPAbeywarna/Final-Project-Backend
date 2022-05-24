@@ -101,14 +101,7 @@
                                     required
                                 ></v-text-field>
 
-                                <v-text-field
-                                    outlined
-                                    v-model="form.city"
-                                    :rules="cityRules"
-                                    label="City"
-                                    type="city"
-                                    required
-                                ></v-text-field>
+
 
                                 <v-text-field
                                     outlined
@@ -128,16 +121,7 @@
                                     required
                                 ></v-text-field>
 
-                                <v-select
-                                    outlined
-                                    :items="GenderTypes"
-                                    item-text="titles"
-                                    item-value="values"
-                                    v-model="form.gender"
-                                    :rules="genderRules"
-                                    label="Gender"
-                                    required
-                                ></v-select>
+
 
                                 <v-select
                                     outlined
@@ -191,10 +175,8 @@ export default {
             password_confirmation: '',
             nic:null,
             contact_no:null,
-            city:null,
             address:null,
             birthday:null,
-            gender:null,
             role: null
         },
         valid: false,
@@ -208,18 +190,7 @@ export default {
                 value:"buyer"
             }
         ],
-        GenderTypes:[
-            {
-                titles:"Male",
-                values:'male'
 
-            },
-            {
-                titles: "Female",
-                values: "female"
-            }
-
-        ],
         nameRules: [
             v => !!v || 'Name is required',
         ],
@@ -240,15 +211,11 @@ export default {
         contact_noRules: [
             v => !!v || 'Contact Number is required',
         ],
-        cityRules: [
-            v => !!v || 'City is required',
-        ],
+
         birthdayRules: [
             v => !!v || 'BirthDay is required',
         ],
-        GenderRules: [
-            v => !!v || 'Gender is required',
-        ],
+
         addressRules: [
             v => !!v || 'Address is required',
         ],

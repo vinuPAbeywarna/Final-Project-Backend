@@ -66,14 +66,7 @@
                                                     class="ml-1 mr-1"
                                                 ></v-text-field>
 
-                                                <v-text-field
 
-                                                    label="City"
-                                                    v-model="user.city"
-                                                    outlined
-                                                    dense
-                                                    class="ml-1 mr-1"
-                                                ></v-text-field>
 
 
 
@@ -100,14 +93,7 @@
                                                     class="ml-1 mr-1"
                                                 ></v-text-field>
 
-                                                <v-text-field
-                                                    label="Gender"
-                                                    v-model="user.gender"
-                                                    outlined
-                                                    dense
-                                                    readonly
-                                                    class="ml-1 mr-1"
-                                                ></v-text-field>
+                                                
                                             </v-col>
                                         </v-row>
 

@@ -178,6 +178,7 @@ export default {
         Register(){
             this.loading = true;
             this.$refs.form.validate()
+            // console.log(this.form)
             if(this.valid){
                 client.post('/api/auth/register', this.form).then(response => {
                     console.log(response.data);

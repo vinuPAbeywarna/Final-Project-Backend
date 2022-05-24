@@ -18,7 +18,7 @@ class AuthController extends Controller
             $this->validate($request, [
                 'name' => 'required',
                 'email' => 'required|email',
-                'password' => 'required|confirmed',
+                'password' => 'required|alpha_num|between:4,8|confirmed',//'required|confirmed',
                 'role' => 'required|string|in:buyer,seller'
             ]);
 

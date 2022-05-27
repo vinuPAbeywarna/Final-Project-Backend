@@ -3,9 +3,9 @@
         <v-row no-gutters>
             <v-card height="480" width="480">
                 <v-img :src="product.image" height="480px" width="480px"></v-img>
-<!--                <vue-three-sixty :amount=36-->
-<!--                    imagePath="https://scaleflex.cloudimg.io/width/600/q35/https://scaleflex.ultrafast.io/https://scaleflex.airstore.io/demo/chair-360-36"-->
-<!--                    fileName="chair_{cart}.jpg?v1" />-->
+                <!--                <vue-three-sixty :amount=36-->
+                <!--                    imagePath="https://scaleflex.cloudimg.io/width/600/q35/https://scaleflex.ultrafast.io/https://scaleflex.airstore.io/demo/chair-360-36"-->
+                <!--                    fileName="chair_{cart}.jpg?v1" />-->
 
             </v-card>
 
@@ -28,7 +28,6 @@
                 </v-card-title>
 
 
-
                 <v-card-text class="text-justify">
                     {{ product.description }}
                 </v-card-text>
@@ -40,23 +39,24 @@
                             </v-text-field>
                         </v-col>
                         <v-btn v-on:click="addToCart" height="56" color="orange" outlined>
-                            <v-icon>mdi-cart-plus</v-icon> Add to Cart
+                            <v-icon>mdi-cart-plus</v-icon>
+                            Add to Cart
                         </v-btn>
                     </v-row>
                 </v-card-text>
             </v-col>
         </v-row>
 
-        <v-toolbar-title class="mt-15 font-weight-bold ">You Might Also Like</v-toolbar-title>
-        <v-card class="mx-auto" max-width="1200">
+        <v-toolbar-title class="mt-15 font-weight-bold" v-if="showcaseProducts.length">You Might Also Like</v-toolbar-title>
+        <v-card class="mx-auto" max-width="1200" v-if="showcaseProducts.length">
             <v-container fluid>
                 <v-row dense>
-                    <v-col v-for="item in items" :key="item.id" :cols="6" cols="12" sm="3">
+                    <v-col v-for="item in showcaseProducts" :key="item.id" :cols="6" cols="12" sm="3">
                         <v-card>
                             <v-img :src="item.image" class="white--text align-end"
-                                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px">
+                                   gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px">
                                 <v-card-title v-text="item.name"></v-card-title>
-                                <v-card-text class="font-weight-thin">{{ item.price }}</v-card-text>
+                                <v-card-text class="font-weight-thin">{{ item.price }} LKR</v-card-text>
                             </v-img>
 
                             <v-card-actions>
@@ -89,8 +89,7 @@
 </template>
 
 <script>
-import { authClient } from "../Plugins/client";
-
+import {authClient} from "../Plugins/client";
 export default {
     name: "Products",
     data: () => ({
@@ -108,15 +107,15 @@ export default {
         getProduct() {
             axios.get('/api/product/GetSingleProduct/' + this.$route.params.id)
                 .then((response) => {
-                    this.product = response.data;
-                }
+                        this.product = response.data;
+                    }
                 );
         },
         getAllProducts() {
             axios.get('/api/product/all')
                 .then((response) => {
-                    this.items = response.data;
-                }
+                        this.items = response.data;
+                    }
                 );
         },
         addToCart() {
@@ -156,6 +155,19 @@ export default {
     computed: {
         wishlistItems() {
             return this.$store.state.wishlist.items
+        },
+        showcaseProducts() {
+            let product_id = this.product.id
+            let category_id = this.product.category_id
+            let showcase_items = []
+            this.items.forEach(function (item) {
+                if (item.id !== product_id) {
+                    if (item.category_id === category_id) {
+                        showcase_items.push(item)
+                    }
+                }
+            });
+            return showcase_items
         }
     }
 }

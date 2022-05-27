@@ -1,5 +1,6 @@
 <template>
     <v-container>
+        <v-toolbar-title>Cart</v-toolbar-title>
         <v-card>
             <v-data-table
                 :items="cartItems"

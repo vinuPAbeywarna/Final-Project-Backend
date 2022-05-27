@@ -51,8 +51,8 @@ class UserController extends Controller
     public function DeleteUser(Request $request):JsonResponse
     {
         try{
-            \Auth::user()->delete();
-            return response()->json('The post successfully deleted');
+            User::find($request->get('user_id'))->delete();
+            return response()->json('The User successfully deleted');
         }catch (\Exception $e) {
             return response()->json($e->getMessage(),500);
         }

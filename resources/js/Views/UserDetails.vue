@@ -151,10 +151,10 @@ export default {
 
 
         DeleteUser(item){
-            authClient.delete('api/user-details/DeleteUser', {params: {id: item.id}})
+            authClient.post('api/user-details/DeleteUser',{user_id:item.id})
             .then((response)=>{
-                console.log(response)
-                this.users= response.data.users
+                console.log(response);
+                this.GetUsers();
             })
         },
 
@@ -184,6 +184,7 @@ export default {
         },
 
         closeDelete() {
+
             this.dialogDelete = false
             this.$nextTick(() => {
                 this.editedItem = Object.assign({}, this.defaultItem)

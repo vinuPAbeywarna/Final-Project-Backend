@@ -19,9 +19,9 @@
                         icon>
                         <v-icon>mdi-heart</v-icon>
                     </v-btn>
-                    <v-btn color="orange" icon>
-                        <v-icon>mdi-plus</v-icon>
-                    </v-btn>
+<!--                    <v-btn color="orange" icon>-->
+<!--                        <v-icon>mdi-plus</v-icon>-->
+<!--                    </v-btn>-->
                 </v-card-actions>
             </v-card>
         </v-row>

@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/add-new-users/AddEditUser', [UserController::class, 'AddEditUser']);
     Route::delete('/product-list/DeleteProduct', [ProductController::class, 'DeleteProduct']);
     Route::post('/dashboard/GetFinishOrder', [OrdersController::class, 'GetFinishOrder']);
-    Route::delete('/user-details/DeleteUser', [UserController::class, 'DeleteUser']);
+    Route::post('/user-details/DeleteUser', [UserController::class, 'DeleteUser']);
 
     Route::controller('App\Http\Controllers\CartController')->prefix('cart')->group(function () {
         Route::get('all', 'all');
